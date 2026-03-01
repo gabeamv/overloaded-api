@@ -17,13 +17,13 @@ import (
 func main() {
 	err := godotenv.Load(".env")
 	if err != nil {
-		fmt.Println("error loading .env file: %v", err)
+		fmt.Printf("error loading .env file: %v\n", err)
 		os.Exit(1)
 	}
 	dbURL := os.Getenv("DB_URL")
 	db, err := sql.Open("postgres", dbURL)
 	if err != nil {
-		fmt.Println("error opening connection to database: %v", err)
+		fmt.Printf("error opening connection to database: %v\n", err)
 		os.Exit(1)
 	}
 	queries := database.New(db)
@@ -31,7 +31,7 @@ func main() {
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("POST api/users/login", config.HandlerLoginUser)
-	mux.HandleFunc("POST api/users/register")
+	mux.HandleFunc("POST api/users/register", config.HandlerRegisterUser)
 
 	server := &http.Server{
 		Handler: mux,
