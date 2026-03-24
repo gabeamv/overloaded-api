@@ -1,4 +1,4 @@
-package overloadedapi
+package main
 
 import (
 	"database/sql"
@@ -26,8 +26,9 @@ func main() {
 		fmt.Printf("error opening connection to database: %v\n", err)
 		os.Exit(1)
 	}
+	secret := os.Getenv("SECRET")
 	queries := database.New(db)
-	config := api.Config{DBQueries: queries}
+	config := api.Config{DbQueries: queries, Secret: secret}
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("POST api/users/login", config.HandlerLoginUser)
