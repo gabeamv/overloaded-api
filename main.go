@@ -31,8 +31,8 @@ func main() {
 	config := api.Config{DbQueries: queries, Secret: secret}
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("POST api/users/login", config.HandlerLoginUser)
-	mux.HandleFunc("POST api/users/register", config.HandlerRegisterUser)
+	mux.HandleFunc("POST /api/users/login", config.HandlerLoginUser)
+	mux.HandleFunc("POST /api/users/register", config.HandlerRegisterUser)
 
 	server := &http.Server{
 		Handler: mux,
