@@ -8,3 +8,10 @@ VALUES (
     $5
 )
 RETURNING *;
+
+-- name: GetUserByUsername :one
+SELECT * FROM users
+WHERE username = $1;
+
+-- name: DeleteAllUsers :exec
+DELETE FROM users;

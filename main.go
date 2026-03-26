@@ -31,6 +31,7 @@ func main() {
 	config := api.Config{DbQueries: queries, Secret: secret}
 
 	mux := http.NewServeMux()
+	mux.HandleFunc("DELETE /admin/reset", config.HandlerDevReset)
 	mux.HandleFunc("POST /api/users/login", config.HandlerLoginUser)
 	mux.HandleFunc("POST /api/users/register", config.HandlerRegisterUser)
 
