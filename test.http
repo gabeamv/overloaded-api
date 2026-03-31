@@ -16,3 +16,12 @@ Content-Type: application/json
 }
 ###
 DELETE http://localhost:8080/admin/reset
+###
+POST http://localhost:8080/api/exercises
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiNTg4MTYwNDgtNWNjMi00ZWIxLTlhNWQtNTkwZmU4MWRkYmMxIiwiZXhwIjoxNzc0OTI4ODIyLCJpYXQiOjE3NzQ5MjUyMjJ9.5AgBkzuBb4DJAbiRWcdPl0hYhfRst4BN5cNHGExWOP8
+
+{
+    "name": "pushups",
+    "is_custom": true
+}

@@ -12,8 +12,17 @@ import (
 )
 
 type Exercise struct {
-	ID   uuid.UUID
-	Name string
+	ID       uuid.UUID
+	Name     string
+	IsCustom bool
+	UserID   uuid.NullUUID
+}
+
+type ProgressionRule struct {
+	ID          uuid.UUID
+	Label       string
+	Rule        string
+	Description string
 }
 
 type RefreshToken struct {
@@ -32,4 +41,23 @@ type User struct {
 	HashedPassword sql.NullString
 	CreatedAt      time.Time
 	UpdatedAt      time.Time
+}
+
+type Workout struct {
+	ID        uuid.UUID
+	UserID    uuid.UUID
+	StartedAt time.Time
+	EndedAt   time.Time
+	Volume    int32
+	Prs       int32
+}
+
+type WorkoutSet struct {
+	ID            uuid.UUID
+	WorkoutID     uuid.UUID
+	ExerciseID    uuid.UUID
+	ProgressTrack uuid.UUID
+	WeightInLbs   sql.NullString
+	Reps          sql.NullString
+	TimeInSeconds sql.NullString
 }

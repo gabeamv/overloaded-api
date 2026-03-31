@@ -31,9 +31,25 @@ func main() {
 	config := api.Config{DbQueries: queries, Secret: secret}
 
 	mux := http.NewServeMux()
+
 	mux.HandleFunc("DELETE /admin/reset", config.HandlerDevReset)
+
 	mux.HandleFunc("POST /api/users/login", config.HandlerLoginUser)
 	mux.HandleFunc("POST /api/users/register", config.HandlerRegisterUser)
+
+	mux.HandleFunc("POST /api/exercises", config.HandlerAddExercise)
+	//mux.HandleFunc("GET /api/exercises", config.HandlerGetAllExercises)
+	//mux.HandleFunc("GET /api/exercises/{exercise_id}", config.HandlerGetExerciseById)
+	//mux.HandleFunc("PUT /api/exercises/{exercise_id}", config.HandlerUpdateExerciseById)
+	//mux.HandleFunc("DELETE /api/exercises{exercise_id}", config.HandlerDeleteExerciseById)
+
+	//mux.HandleFunc("POST /api/workouts", config.HandlerAddWorkout)
+	//mux.HandleFunc("POST /api/workouts/{workout_id}/workout_sets", config.HandlerAddWorkoutSet)
+	//mux.HandleFunc("GET /api/workouts/{workout_id}", config.HandlerGetWorkoutById)
+	//mux.HandleFunc("PUT /api/workouts/{workout_id}", config.HandlerUpdateWorkoutById)
+	//mux.HandleFunc("DELETE /api/workouts/{workout_id}", config.HandlerDeleteWorkoutById)
+
+	//mux.HandleFunc("GET /api/progressions_rules", config.HandlerGetProgressionRules)
 
 	server := &http.Server{
 		Handler: mux,
