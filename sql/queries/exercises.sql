@@ -6,3 +6,7 @@ VALUES (
     $3
 )
 RETURNING *;
+
+-- name: GetAllExercisesUserId :many
+SELECT * FROM exercises
+WHERE user_id = $1 AND is_custom = true;

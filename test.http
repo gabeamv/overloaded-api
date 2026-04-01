@@ -19,9 +19,13 @@ DELETE http://localhost:8080/admin/reset
 ###
 POST http://localhost:8080/api/exercises
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiZjU4ZTZjNmMtMTJmZS00ZDljLTk1MjctYjMzNDEwNDQzNmQzIiwiZXhwIjoxNzc1MDE4NjczLCJpYXQiOjE3NzUwMTUwNzN9.tQG_KciIG5PHrS7hNpYKbM6rmSrWYoIr0P8U-s4s8I0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiZTMzZGY4YzMtZWViNS00MTg3LThlNTktYjc2MjY0NjA0ZTY3IiwiZXhwIjoxNzc1MDI2NTA3LCJpYXQiOjE3NzUwMjI5MDd9.ZzkfV_uMFBCrGwNDP8VhujaP4k7M2X15JEIQ8PQ4jBM
 
 {
     "name": "pushups",
     "is_custom": true
 }
+###
+GET http://localhost:8080/api/exercises
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiZTMzZGY4YzMtZWViNS00MTg3LThlNTktYjc2MjY0NjA0ZTY3IiwiZXhwIjoxNzc1MDI2NTA3LCJpYXQiOjE3NzUwMjI5MDd9.ZzkfV_uMFBCrGwNDP8VhujaP4k7M2X15JEIQ8PQ4jBM

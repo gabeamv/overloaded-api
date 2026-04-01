@@ -38,3 +38,36 @@ func (q *Queries) CreateExercise(ctx context.Context, arg CreateExerciseParams) 
 	)
 	return i, err
 }
+
+const getAllExercisesUserId = `-- name: GetAllExercisesUserId :many
+SELECT id, name, is_custom, user_id FROM exercises
+WHERE user_id = $1 AND is_custom = true
+`
+
+func (q *Queries) GetAllExercisesUserId(ctx context.Context, userID uuid.NullUUID) ([]Exercise, error) {
+	rows, err := q.db.QueryContext(ctx, getAllExercisesUserId, userID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Exercise
+	for rows.Next() {
+		var i Exercise
+		if err := rows.Scan(
+			&i.ID,
+			&i.Name,
+			&i.IsCustom,
+			&i.UserID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
