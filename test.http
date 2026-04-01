@@ -1,0 +1,27 @@
+POST http://localhost:8080/api/users/register
+Content-Type: application/json
+
+{
+    "email": "gamvred7@gmail.com",
+    "username": "gabeamv",
+    "password": "password123"
+}
+###
+POST http://localhost:8080/api/users/login
+Content-Type: application/json
+
+{
+    "username": "gabeamv",
+    "password": "password123"
+}
+###
+DELETE http://localhost:8080/admin/reset
+###
+POST http://localhost:8080/api/exercises
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiZjU4ZTZjNmMtMTJmZS00ZDljLTk1MjctYjMzNDEwNDQzNmQzIiwiZXhwIjoxNzc1MDE4NjczLCJpYXQiOjE3NzUwMTUwNzN9.tQG_KciIG5PHrS7hNpYKbM6rmSrWYoIr0P8U-s4s8I0
+
+{
+    "name": "pushups",
+    "is_custom": true
+}
