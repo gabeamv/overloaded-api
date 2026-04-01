@@ -4,6 +4,7 @@ CREATE TABLE exercises (
     name TEXT NOT NULL,
     is_custom BOOLEAN NOT NULL DEFAULT FALSE,
     user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    UNIQUE(name, user_id),
     CHECK (
         (is_custom = true AND user_id IS NOT NULL)
         OR
