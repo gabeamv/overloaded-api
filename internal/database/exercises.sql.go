@@ -71,3 +71,20 @@ func (q *Queries) GetAllExercisesUserId(ctx context.Context, userID uuid.NullUUI
 	}
 	return items, nil
 }
+
+const getExerciseById = `-- name: GetExerciseById :one
+SELECT id, name, is_custom, user_id FROM exercises
+WHERE id = $1
+`
+
+func (q *Queries) GetExerciseById(ctx context.Context, id uuid.UUID) (Exercise, error) {
+	row := q.db.QueryRowContext(ctx, getExerciseById, id)
+	var i Exercise
+	err := row.Scan(
+		&i.ID,
+		&i.Name,
+		&i.IsCustom,
+		&i.UserID,
+	)
+	return i, err
+}

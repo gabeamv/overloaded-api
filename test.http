@@ -2,8 +2,8 @@ POST http://localhost:8080/api/users/register
 Content-Type: application/json
 
 {
-    "email": "gamvred7@gmail.com",
-    "username": "gabeamv",
+    "email": "gamvred7random@gmail.com",
+    "username": "gabeamvrandom",
     "password": "password123"
 }
 ###
@@ -11,7 +11,7 @@ POST http://localhost:8080/api/users/login
 Content-Type: application/json
 
 {
-    "username": "gabeamv",
+    "username": "gabeamvrandom",
     "password": "password123"
 }
 ###
@@ -19,7 +19,7 @@ DELETE http://localhost:8080/admin/reset
 ###
 POST http://localhost:8080/api/exercises
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiZTMzZGY4YzMtZWViNS00MTg3LThlNTktYjc2MjY0NjA0ZTY3IiwiZXhwIjoxNzc1MDI2NTA3LCJpYXQiOjE3NzUwMjI5MDd9.ZzkfV_uMFBCrGwNDP8VhujaP4k7M2X15JEIQ8PQ4jBM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiNmY5NzQxZGUtNTEzZi00MjBkLTkyYzItYWI5M2EwODAzMDM5IiwiZXhwIjoxNzc1MTE2MjY5LCJpYXQiOjE3NzUxMTI2Njl9.bgR8X4QCm_qCShVCtFqe7BZSJCNwTE1JhzXCS5364hQ
 
 {
     "name": "pushups",
@@ -28,4 +28,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZ
 ###
 GET http://localhost:8080/api/exercises
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiZTMzZGY4YzMtZWViNS00MTg3LThlNTktYjc2MjY0NjA0ZTY3IiwiZXhwIjoxNzc1MDI2NTA3LCJpYXQiOjE3NzUwMjI5MDd9.ZzkfV_uMFBCrGwNDP8VhujaP4k7M2X15JEIQ8PQ4jBM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiNmY5NzQxZGUtNTEzZi00MjBkLTkyYzItYWI5M2EwODAzMDM5IiwiZXhwIjoxNzc1MTE2MjY5LCJpYXQiOjE3NzUxMTI2Njl9.bgR8X4QCm_qCShVCtFqe7BZSJCNwTE1JhzXCS5364hQ
+###
+GET http://localhost:8080/api/exercises/81d5f051-973a-4f89-bd8b-e6a5cf8c7ee8
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiNmY5NzQxZGUtNTEzZi00MjBkLTkyYzItYWI5M2EwODAzMDM5IiwiZXhwIjoxNzc1MTE2MjY5LCJpYXQiOjE3NzUxMTI2Njl9.bgR8X4QCm_qCShVCtFqe7BZSJCNwTE1JhzXCS5364hQ
