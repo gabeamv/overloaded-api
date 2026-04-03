@@ -14,3 +14,9 @@ WHERE user_id = $1 AND is_custom = true;
 -- name: GetExerciseById :one
 SELECT * FROM exercises
 WHERE id = $1;
+
+-- name: UpdateExerciseNameById :one
+UPDATE exercises
+SET name = $2
+WHERE id = $1
+RETURNING *;

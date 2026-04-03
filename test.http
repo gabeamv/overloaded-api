@@ -2,8 +2,8 @@ POST http://localhost:8080/api/users/register
 Content-Type: application/json
 
 {
-    "email": "gamvred7random@gmail.com",
-    "username": "gabeamvrandom",
+    "email": "gamvred7@gmail.com",
+    "username": "gabeamv",
     "password": "password123"
 }
 ###
@@ -11,7 +11,7 @@ POST http://localhost:8080/api/users/login
 Content-Type: application/json
 
 {
-    "username": "gabeamvrandom",
+    "username": "gabeamv",
     "password": "password123"
 }
 ###
@@ -19,7 +19,7 @@ DELETE http://localhost:8080/admin/reset
 ###
 POST http://localhost:8080/api/exercises
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiNmY5NzQxZGUtNTEzZi00MjBkLTkyYzItYWI5M2EwODAzMDM5IiwiZXhwIjoxNzc1MTE2MjY5LCJpYXQiOjE3NzUxMTI2Njl9.bgR8X4QCm_qCShVCtFqe7BZSJCNwTE1JhzXCS5364hQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiZGViODM0ZTctMjFhMi00NTZjLWIzODItOWJjOWQ2YmNhMWI5IiwiZXhwIjoxNzc1MjAwMTMxLCJpYXQiOjE3NzUxOTY1MzF9.5nS1TCZe_6hA7Mo1Z4D9_r7Q03ACOv7_1rklKWsPf_I
 
 {
     "name": "pushups",
@@ -28,8 +28,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZ
 ###
 GET http://localhost:8080/api/exercises
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiNmY5NzQxZGUtNTEzZi00MjBkLTkyYzItYWI5M2EwODAzMDM5IiwiZXhwIjoxNzc1MTE2MjY5LCJpYXQiOjE3NzUxMTI2Njl9.bgR8X4QCm_qCShVCtFqe7BZSJCNwTE1JhzXCS5364hQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiZGViODM0ZTctMjFhMi00NTZjLWIzODItOWJjOWQ2YmNhMWI5IiwiZXhwIjoxNzc1MjAwMTMxLCJpYXQiOjE3NzUxOTY1MzF9.5nS1TCZe_6hA7Mo1Z4D9_r7Q03ACOv7_1rklKWsPf_I
 ###
-GET http://localhost:8080/api/exercises/81d5f051-973a-4f89-bd8b-e6a5cf8c7ee8
+GET http://localhost:8080/api/exercises/25a0646a-33e3-443a-906c-faa775c92ecd
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiNmY5NzQxZGUtNTEzZi00MjBkLTkyYzItYWI5M2EwODAzMDM5IiwiZXhwIjoxNzc1MTE2MjY5LCJpYXQiOjE3NzUxMTI2Njl9.bgR8X4QCm_qCShVCtFqe7BZSJCNwTE1JhzXCS5364hQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiZGViODM0ZTctMjFhMi00NTZjLWIzODItOWJjOWQ2YmNhMWI5IiwiZXhwIjoxNzc1MjAwMTMxLCJpYXQiOjE3NzUxOTY1MzF9.5nS1TCZe_6hA7Mo1Z4D9_r7Q03ACOv7_1rklKWsPf_I
+###
+PUT http://localhost:8080/api/exercises/25a0646a-33e3-443a-906c-faa775c92ecd
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiODE5NmY0YmUtOGY1Mi00NGVhLTlkNTAtZjcxYjIyZDhkYzllIiwiZXhwIjoxNzc1MjAwMzEyLCJpYXQiOjE3NzUxOTY3MTJ9.0OGx9XzEl80i1oJhD7TIXtpXgokyEoY2-Bsmur2Qra0
+
+{
+    "name": "push"
+}

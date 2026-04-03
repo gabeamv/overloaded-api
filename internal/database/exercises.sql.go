@@ -88,3 +88,27 @@ func (q *Queries) GetExerciseById(ctx context.Context, id uuid.UUID) (Exercise, 
 	)
 	return i, err
 }
+
+const updateExerciseNameById = `-- name: UpdateExerciseNameById :one
+UPDATE exercises
+SET name = $2
+WHERE id = $1
+RETURNING id, name, is_custom, user_id
+`
+
+type UpdateExerciseNameByIdParams struct {
+	ID   uuid.UUID
+	Name string
+}
+
+func (q *Queries) UpdateExerciseNameById(ctx context.Context, arg UpdateExerciseNameByIdParams) (Exercise, error) {
+	row := q.db.QueryRowContext(ctx, updateExerciseNameById, arg.ID, arg.Name)
+	var i Exercise
+	err := row.Scan(
+		&i.ID,
+		&i.Name,
+		&i.IsCustom,
+		&i.UserID,
+	)
+	return i, err
+}

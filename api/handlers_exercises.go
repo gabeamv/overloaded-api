@@ -114,3 +114,61 @@ func (c *Config) HandlerGetExerciseById(w http.ResponseWriter, r *http.Request) 
 	resp := exerciseResp{Id: exercise.ID, Name: exercise.Name, IsCustom: exercise.IsCustom, UserId: exercise.UserID.UUID}
 	ResponseJSON(w, http.StatusOK, resp)
 }
+
+func (c *Config) HandlerUpdateExerciseNameById(w http.ResponseWriter, r *http.Request) {
+	type request struct {
+		Name string `json:"name"`
+	}
+	token, err := auth.GetBearerToken(r.Header)
+	if err != nil {
+		err = fmt.Errorf("error getting token: %w", err)
+		ResponseError(w, http.StatusUnauthorized, err.Error(), err)
+		return
+	}
+	userId, err := auth.ValidateJWT(token, c.Secret)
+	if err != nil {
+		err = fmt.Errorf("unauthorized request to get users custom exercises: %w", err)
+		ResponseError(w, http.StatusUnauthorized, err.Error(), err)
+		return
+	}
+	id, err := uuid.Parse(r.PathValue("exercise_id"))
+	if err != nil {
+		err = fmt.Errorf("error parsing path value 'exercise_id' into type UUID: %w", err)
+		ResponseError(w, http.StatusNotFound, err.Error(), err)
+		return
+	}
+	exercise, err := c.DbQueries.GetExerciseById(context.Background(), id)
+	if err != nil {
+		err = fmt.Errorf("error getting exercise of id '%v': %w", id, err)
+		ResponseError(w, http.StatusInternalServerError, err.Error(), err)
+		return
+	}
+	initalName := exercise.Name
+	if exercise.IsCustom && userId != exercise.UserID.UUID {
+		err = fmt.Errorf("error, unauthorized request to get exercise '%v': %w", exercise.ID, err)
+		ResponseError(w, http.StatusUnauthorized, err.Error(), err)
+		return
+	}
+	if !exercise.IsCustom {
+		err = fmt.Errorf("error, unauthorized request to update non-custom exercise '%v': %w", exercise.ID, err)
+		ResponseError(w, http.StatusUnauthorized, err.Error(), err)
+		return
+	}
+	var req request
+	decoder := json.NewDecoder(r.Body)
+	defer r.Body.Close()
+	err = decoder.Decode(&req)
+	if err != nil {
+		err := fmt.Errorf("error decoding exercise name request: %v", err)
+		ResponseError(w, http.StatusInternalServerError, err.Error(), err)
+		return
+	}
+	exercise, err = c.DbQueries.UpdateExerciseNameById(context.Background(), database.UpdateExerciseNameByIdParams{ID: id, Name: req.Name})
+	if err != nil {
+		err = fmt.Errorf("error updating exercise '%v', name of '%v' for '%v': %w", id, initalName, req.Name, err)
+		ResponseError(w, http.StatusInternalServerError, err.Error(), err)
+		return
+	}
+	resp := exerciseResp{Id: exercise.ID, Name: exercise.Name, IsCustom: exercise.IsCustom, UserId: exercise.UserID.UUID}
+	ResponseJSON(w, http.StatusAccepted, resp)
+}
