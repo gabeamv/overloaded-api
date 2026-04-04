@@ -20,3 +20,7 @@ UPDATE exercises
 SET name = $2
 WHERE id = $1
 RETURNING *;
+
+-- name: DeleteExerciseById :exec
+DELETE FROM exercises
+WHERE id = $1;

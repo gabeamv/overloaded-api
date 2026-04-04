@@ -41,7 +41,7 @@ func main() {
 	mux.HandleFunc("GET /api/exercises", config.HandlerGetAllCustomExercisesUserId)
 	mux.HandleFunc("GET /api/exercises/{exercise_id}", config.HandlerGetExerciseById)
 	mux.HandleFunc("PUT /api/exercises/{exercise_id}", config.HandlerUpdateExerciseNameById)
-	//mux.HandleFunc("DELETE /api/exercises{exercise_id}", config.HandlerDeleteExerciseById)
+	mux.HandleFunc("DELETE /api/exercises/{exercise_id}", config.HandlerDeleteExerciseById)
 
 	//mux.HandleFunc("POST /api/workouts", config.HandlerAddWorkout)
 	//mux.HandleFunc("POST /api/workouts/{workout_id}/workout_sets", config.HandlerAddWorkoutSet)

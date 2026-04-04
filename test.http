@@ -19,25 +19,30 @@ DELETE http://localhost:8080/admin/reset
 ###
 POST http://localhost:8080/api/exercises
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiZGViODM0ZTctMjFhMi00NTZjLWIzODItOWJjOWQ2YmNhMWI5IiwiZXhwIjoxNzc1MjAwMTMxLCJpYXQiOjE3NzUxOTY1MzF9.5nS1TCZe_6hA7Mo1Z4D9_r7Q03ACOv7_1rklKWsPf_I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiNTE5MTYwNWYtN2ZlYy00N2E2LWI2Y2QtNmNmNzRhN2NjNjMxIiwiZXhwIjoxNzc1Mjg4Mzc0LCJpYXQiOjE3NzUyODQ3NzR9.fxpORmZUxSrYEHRfLGQs5phlq0LcWekdWf1Ji5O9JJ0
 
 {
-    "name": "pushups",
+    "name": "push",
     "is_custom": true
 }
 ###
 GET http://localhost:8080/api/exercises
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiZGViODM0ZTctMjFhMi00NTZjLWIzODItOWJjOWQ2YmNhMWI5IiwiZXhwIjoxNzc1MjAwMTMxLCJpYXQiOjE3NzUxOTY1MzF9.5nS1TCZe_6hA7Mo1Z4D9_r7Q03ACOv7_1rklKWsPf_I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiNTE5MTYwNWYtN2ZlYy00N2E2LWI2Y2QtNmNmNzRhN2NjNjMxIiwiZXhwIjoxNzc1Mjg4Mzc0LCJpYXQiOjE3NzUyODQ3NzR9.fxpORmZUxSrYEHRfLGQs5phlq0LcWekdWf1Ji5O9JJ0
 ###
 GET http://localhost:8080/api/exercises/25a0646a-33e3-443a-906c-faa775c92ecd
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiZGViODM0ZTctMjFhMi00NTZjLWIzODItOWJjOWQ2YmNhMWI5IiwiZXhwIjoxNzc1MjAwMTMxLCJpYXQiOjE3NzUxOTY1MzF9.5nS1TCZe_6hA7Mo1Z4D9_r7Q03ACOv7_1rklKWsPf_I
 ###
-PUT http://localhost:8080/api/exercises/25a0646a-33e3-443a-906c-faa775c92ecd
+PUT http://localhost:8080/api/exercises/32b86ccc-5753-44c0-ae41-51ee3da51541
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiODE5NmY0YmUtOGY1Mi00NGVhLTlkNTAtZjcxYjIyZDhkYzllIiwiZXhwIjoxNzc1MjAwMzEyLCJpYXQiOjE3NzUxOTY3MTJ9.0OGx9XzEl80i1oJhD7TIXtpXgokyEoY2-Bsmur2Qra0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiNTE5MTYwNWYtN2ZlYy00N2E2LWI2Y2QtNmNmNzRhN2NjNjMxIiwiZXhwIjoxNzc1Mjg4Mzc0LCJpYXQiOjE3NzUyODQ3NzR9.fxpORmZUxSrYEHRfLGQs5phlq0LcWekdWf1Ji5O9JJ0
 
 {
     "name": "push"
 }
+###
+DELETE http://localhost:8080/api/exercises/9b19c037-5865-4444-8491-5d3246be656d
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiNTE5MTYwNWYtN2ZlYy00N2E2LWI2Y2QtNmNmNzRhN2NjNjMxIiwiZXhwIjoxNzc1Mjg4Mzc0LCJpYXQiOjE3NzUyODQ3NzR9.fxpORmZUxSrYEHRfLGQs5phlq0LcWekdWf1Ji5O9JJ0
+###
