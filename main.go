@@ -49,7 +49,9 @@ func main() {
 	//mux.HandleFunc("PUT /api/workouts/{workout_id}", config.HandlerUpdateWorkoutById)
 	//mux.HandleFunc("DELETE /api/workouts/{workout_id}", config.HandlerDeleteWorkoutById)
 
-	//mux.HandleFunc("GET /api/progressions_rules", config.HandlerGetProgressionRules)
+	mux.HandleFunc("GET /api/progression_rules", config.HandlerGetAllProgressionRules)
+	mux.HandleFunc("POST /api/progression_rules", config.HandlerDevApplyProgressionRules)
+	mux.HandleFunc("DELETE /api/progression_rules", config.HandlerDevResetProgressionRules)
 
 	server := &http.Server{
 		Handler: mux,
