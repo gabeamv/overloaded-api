@@ -43,7 +43,7 @@ func main() {
 	mux.HandleFunc("PUT /api/exercises/{exercise_id}", config.HandlerUpdateExerciseNameById)
 	mux.HandleFunc("DELETE /api/exercises/{exercise_id}", config.HandlerDeleteExerciseById)
 
-	//mux.HandleFunc("POST /api/workouts", config.HandlerAddWorkout)
+	mux.HandleFunc("POST /api/workouts", config.HandlerAddWorkout)
 	//mux.HandleFunc("POST /api/workouts/{workout_id}/workout_sets", config.HandlerAddWorkoutSet)
 	//mux.HandleFunc("GET /api/workouts/{workout_id}", config.HandlerGetWorkoutById)
 	//mux.HandleFunc("PUT /api/workouts/{workout_id}", config.HandlerUpdateWorkoutById)

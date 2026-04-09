@@ -60,3 +60,15 @@ func MakeRefreshToken() (string, error) {
 	refreshToken := hex.EncodeToString(bytes)
 	return refreshToken, nil
 }
+
+func GetAndValidateToken(header http.Header, secret string) (uuid.UUID, error) {
+	token, err := GetBearerToken(header)
+	if err != nil {
+		return uuid.UUID{}, fmt.Errorf("error getting token from header: %w", err)
+	}
+	userId, err := ValidateJWT(token, secret)
+	if err != nil {
+		return uuid.UUID{}, fmt.Errorf("unauthorized request, token '%v' invalid: %w", token, err)
+	}
+	return userId, nil
+}
