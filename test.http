@@ -21,7 +21,7 @@ DELETE {{host}}/admin/reset
 ###
 POST {{host}}/api/exercises
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiYzc4MjNjMjMtOWY4OS00ZjYwLTgwZjQtNDRiMTg1OTEyNTc5IiwiZXhwIjoxNzc1Njk3MDgyLCJpYXQiOjE3NzU2OTM0ODJ9.5CQLrRBn7aQYMqEzPMIvrhcrjpTTwAOEUjwjRmiQ8Ro
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiMDQwNWY3NWQtZjQzMS00ZmEwLThiNTgtMDA0MTJhNDNlYjI0IiwiZXhwIjoxNzc2MDcwMjU0LCJpYXQiOjE3NzYwNjY2NTR9.V4GfQWMrnR8mBsVvkYWQrt1c7cHEB_chLh1CcFoah48
 
 {
     "name": "push",
@@ -30,7 +30,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZ
 ###
 GET {{host}}/api/exercises
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiYzc4MjNjMjMtOWY4OS00ZjYwLTgwZjQtNDRiMTg1OTEyNTc5IiwiZXhwIjoxNzc1Njk3MDgyLCJpYXQiOjE3NzU2OTM0ODJ9.5CQLrRBn7aQYMqEzPMIvrhcrjpTTwAOEUjwjRmiQ8Ro
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiMDQwNWY3NWQtZjQzMS00ZmEwLThiNTgtMDA0MTJhNDNlYjI0IiwiZXhwIjoxNzc2MDcwMjU0LCJpYXQiOjE3NzYwNjY2NTR9.V4GfQWMrnR8mBsVvkYWQrt1c7cHEB_chLh1CcFoah48
 ###
 GET {{host}}/api/exercises/25a0646a-33e3-443a-906c-faa775c92ecd
 Content-Type: application/json
@@ -56,14 +56,14 @@ Content-Type: application/json
 ###
 GET {{host}}/api/progression_rules
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiMTZhNjVmODYtZDY3MS00MmY2LWIxODEtMDQ1MTU1NjM5N2EyIiwiZXhwIjoxNzc1NTQzMzgwLCJpYXQiOjE3NzU1Mzk3ODB9.DYLaRqNULcuhGYznqFk3E10Sb3LJ3YrRBPppZrABClU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiMDQwNWY3NWQtZjQzMS00ZmEwLThiNTgtMDA0MTJhNDNlYjI0IiwiZXhwIjoxNzc2MDcwMjU0LCJpYXQiOjE3NzYwNjY2NTR9.V4GfQWMrnR8mBsVvkYWQrt1c7cHEB_chLh1CcFoah48
 ###
 POST {{host}}/api/workouts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiYzc4MjNjMjMtOWY4OS00ZjYwLTgwZjQtNDRiMTg1OTEyNTc5IiwiZXhwIjoxNzc1Njk3MTc5LCJpYXQiOjE3NzU2OTM1Nzl9.Cr221yl6SrmHMGweH2MM0XNRAJ4EfFLw4ut2Nx1WGt4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiMDQwNWY3NWQtZjQzMS00ZmEwLThiNTgtMDA0MTJhNDNlYjI0IiwiZXhwIjoxNzc2MDcwMjU0LCJpYXQiOjE3NzYwNjY2NTR9.V4GfQWMrnR8mBsVvkYWQrt1c7cHEB_chLh1CcFoah48
 
 {
-    "user_id": "c7823c23-9f89-4f60-80f4-44b185912579",
+    "user_id": "0405f75d-f431-4fa0-8b58-00412a43eb24",
     "started_at": "2026-04-08T16:30:00Z",
     "ended_at": "2026-04-08T16:40:00Z",
     "volume": 1000,
@@ -72,12 +72,26 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZ
 ###
 GET {{host}}/api/workouts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiYzc4MjNjMjMtOWY4OS00ZjYwLTgwZjQtNDRiMTg1OTEyNTc5IiwiZXhwIjoxNzc1Njk3MTc5LCJpYXQiOjE3NzU2OTM1Nzl9.Cr221yl6SrmHMGweH2MM0XNRAJ4EfFLw4ut2Nx1WGt4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiMDQwNWY3NWQtZjQzMS00ZmEwLThiNTgtMDA0MTJhNDNlYjI0IiwiZXhwIjoxNzc2MDcwMjU0LCJpYXQiOjE3NzYwNjY2NTR9.V4GfQWMrnR8mBsVvkYWQrt1c7cHEB_chLh1CcFoah48
 ###
-GET {{host}}/api/workouts/workout_id
+GET {{host}}/api/workouts/5349f67f-3150-4ab7-baa1-43e252b76904
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiYzc4MjNjMjMtOWY4OS00ZjYwLTgwZjQtNDRiMTg1OTEyNTc5IiwiZXhwIjoxNzc1Njk3MTc5LCJpYXQiOjE3NzU2OTM1Nzl9.Cr221yl6SrmHMGweH2MM0XNRAJ4EfFLw4ut2Nx1WGt4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiMDQwNWY3NWQtZjQzMS00ZmEwLThiNTgtMDA0MTJhNDNlYjI0IiwiZXhwIjoxNzc2MDcwMjU0LCJpYXQiOjE3NzYwNjY2NTR9.V4GfQWMrnR8mBsVvkYWQrt1c7cHEB_chLh1CcFoah48
 ###
-DELETE {{host}}/api/workouts/workouts_id
+DELETE {{host}}/api/workouts/f74797af-e1cf-412a-a2e5-6263c6262272
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiYzc4MjNjMjMtOWY4OS00ZjYwLTgwZjQtNDRiMTg1OTEyNTc5IiwiZXhwIjoxNzc1Njk3MTc5LCJpYXQiOjE3NzU2OTM1Nzl9.Cr221yl6SrmHMGweH2MM0XNRAJ4EfFLw4ut2Nx1WGt4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiNGI3ZmFiOGQtZTc2OS00ZGNkLTk3MDAtMTAyZDZmMjMwNTFiIiwiZXhwIjoxNzc2MDUyMzkzLCJpYXQiOjE3NzYwNDg3OTN9.Wa-E1RXkwXjeyDE6N8nBrc-v2ZH8Cq-lfvrxYlOHfAI
+###
+POST {{host}}/api/workouts/5349f67f-3150-4ab7-baa1-43e252b76904/sets
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiMDQwNWY3NWQtZjQzMS00ZmEwLThiNTgtMDA0MTJhNDNlYjI0IiwiZXhwIjoxNzc2MDcwMjU0LCJpYXQiOjE3NzYwNjY2NTR9.V4GfQWMrnR8mBsVvkYWQrt1c7cHEB_chLh1CcFoah48
+
+{
+    
+	"exercise_id": "5f67bbdc-292a-48e1-80d3-1b9337ffe37f",
+	"progress_track": "a2658d67-d266-461b-95c1-7e8769079a2a",
+	"weight_in_lbs": 225,
+	"reps": 5,
+	"time_in_seconds": 0
+	
+}

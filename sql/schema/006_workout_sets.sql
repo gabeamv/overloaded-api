@@ -4,9 +4,9 @@ CREATE TABLE workout_sets (
     workout_id UUID NOT NULL REFERENCES workouts(id) ON DELETE CASCADE,
     exercise_id UUID NOT NULL REFERENCES exercises(id) ON DELETE CASCADE,
     progress_track UUID NOT NULL REFERENCES progression_rules(id),
-    weight_in_lbs NUMERIC(6,2),
-    reps NUMERIC(6,2),
-    time_in_seconds numeric(10,2)
+    weight_in_lbs NUMERIC(6,2) NOT NULL DEFAULT 0,
+    reps NUMERIC(6,2) NOT NULL DEFAULT 0,
+    time_in_seconds numeric(10,2) NOT NULL DEFAULT 0
 );
 
 -- +goose Down

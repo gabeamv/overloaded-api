@@ -57,7 +57,7 @@ type WorkoutSet struct {
 	WorkoutID     uuid.UUID
 	ExerciseID    uuid.UUID
 	ProgressTrack uuid.UUID
-	WeightInLbs   sql.NullString
-	Reps          sql.NullString
-	TimeInSeconds sql.NullString
+	WeightInLbs   float64
+	Reps          float64
+	TimeInSeconds float64
 }

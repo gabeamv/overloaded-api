@@ -131,5 +131,5 @@ func (c *Config) HandlerLoginUser(w http.ResponseWriter, r *http.Request) {
 	}
 	resp := response{Id: user.ID, Username: req.Username, Email: user.Email, CreatedAt: user.CreatedAt, UpdatedAt: user.UpdatedAt,
 		Token: accessToken, RefreshToken: refreshToken.Token}
-	ResponseJSON(w, http.StatusOK, resp)
+	ResponseJSON(w, http.StatusAccepted, resp)
 }

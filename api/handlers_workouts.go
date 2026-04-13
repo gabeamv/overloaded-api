@@ -69,7 +69,7 @@ func (c *Config) HandlerAddWorkout(w http.ResponseWriter, r *http.Request) {
 		Volume:    workout.Volume,
 		Prs:       workout.Prs,
 	}
-	ResponseJSON(w, http.StatusOK, resp)
+	ResponseJSON(w, http.StatusCreated, resp)
 }
 
 func (c *Config) HandlerGetAllWorkouts(w http.ResponseWriter, r *http.Request) {
@@ -96,7 +96,7 @@ func (c *Config) HandlerGetAllWorkouts(w http.ResponseWriter, r *http.Request) {
 			Prs:       workout.Prs,
 		})
 	}
-	ResponseJSON(w, http.StatusAccepted, resp)
+	ResponseJSON(w, http.StatusCreated, resp)
 }
 
 func (c *Config) HandlerGetWorkoutById(w http.ResponseWriter, r *http.Request) {
@@ -116,6 +116,11 @@ func (c *Config) HandlerGetWorkoutById(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		err = fmt.Errorf("error getting workout for user '%v': %w", userId, err)
 		ResponseError(w, http.StatusInternalServerError, err.Error(), err)
+		return
+	}
+	if userId != workout.UserID {
+		err = fmt.Errorf("error, unauthorized request for user '%v' to get workout from user '%v'.", userId, workout.UserID)
+		ResponseError(w, http.StatusUnauthorized, err.Error(), err)
 		return
 	}
 	ResponseJSON(w, http.StatusAccepted, workoutResp{
@@ -139,6 +144,17 @@ func (c *Config) HandlerDeleteWorkoutById(w http.ResponseWriter, r *http.Request
 	if err != nil {
 		err = fmt.Errorf("error parsing path value 'workout_id' into type UUID: %w", err)
 		ResponseError(w, http.StatusNotFound, err.Error(), err)
+		return
+	}
+	workout, err := c.DbQueries.GetWorkoutById(context.Background(), id)
+	if err != nil {
+		err = fmt.Errorf("error getting workout for user '%v': %w", userId, err)
+		ResponseError(w, http.StatusInternalServerError, err.Error(), err)
+		return
+	}
+	if userId != workout.UserID {
+		err = fmt.Errorf("error, unauthorized request for user '%v' to delete workout from user '%v'.", userId, workout.UserID)
+		ResponseError(w, http.StatusUnauthorized, err.Error(), err)
 		return
 	}
 	err = c.DbQueries.DeleteWorkoutById(context.Background(), id)

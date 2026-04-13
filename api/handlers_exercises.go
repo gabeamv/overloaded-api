@@ -52,7 +52,7 @@ func (c *Config) HandlerAddExercise(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	resp := exerciseResp{Id: exercise.ID, Name: exercise.Name, IsCustom: exercise.IsCustom, UserId: exercise.UserID.UUID}
-	ResponseJSON(w, http.StatusOK, resp)
+	ResponseJSON(w, http.StatusCreated, resp)
 }
 
 func (c *Config) HandlerGetAllCustomExercisesUserId(w http.ResponseWriter, r *http.Request) {
@@ -78,7 +78,7 @@ func (c *Config) HandlerGetAllCustomExercisesUserId(w http.ResponseWriter, r *ht
 	for _, exercise := range exercises {
 		resp = append(resp, exerciseResp{Id: exercise.ID, Name: exercise.Name, IsCustom: exercise.IsCustom, UserId: exercise.UserID.UUID})
 	}
-	ResponseJSON(w, http.StatusOK, resp)
+	ResponseJSON(w, http.StatusAccepted, resp)
 }
 
 func (c *Config) HandlerGetExerciseById(w http.ResponseWriter, r *http.Request) {
@@ -112,7 +112,7 @@ func (c *Config) HandlerGetExerciseById(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 	resp := exerciseResp{Id: exercise.ID, Name: exercise.Name, IsCustom: exercise.IsCustom, UserId: exercise.UserID.UUID}
-	ResponseJSON(w, http.StatusOK, resp)
+	ResponseJSON(w, http.StatusAccepted, resp)
 }
 
 func (c *Config) HandlerUpdateExerciseNameById(w http.ResponseWriter, r *http.Request) {
