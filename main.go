@@ -44,10 +44,16 @@ func main() {
 	mux.HandleFunc("DELETE /api/exercises/{exercise_id}", config.HandlerDeleteExerciseById)
 
 	mux.HandleFunc("POST /api/workouts", config.HandlerAddWorkout)
-	//mux.HandleFunc("POST /api/workouts/{workout_id}/workout_sets", config.HandlerAddWorkoutSet)
-	//mux.HandleFunc("GET /api/workouts/{workout_id}", config.HandlerGetWorkoutById)
 	//mux.HandleFunc("PUT /api/workouts/{workout_id}", config.HandlerUpdateWorkoutById)
-	//mux.HandleFunc("DELETE /api/workouts/{workout_id}", config.HandlerDeleteWorkoutById)
+	mux.HandleFunc("GET /api/workouts", config.HandlerGetAllWorkouts)
+	mux.HandleFunc("GET /api/workouts/{workout_id}", config.HandlerGetWorkoutById)
+	mux.HandleFunc("DELETE /api/workouts/{workout_id}", config.HandlerDeleteWorkoutById)
+
+	//mux.HandleFunc("POST /api/workouts/{workout_id}/sets", config.HandlerAddSetByWorkoutId)
+	//mux.HandleFunc("GET /api/workouts/{workout_id}/sets", config.HandlerGetSetsByWorkoutId)
+	//mux.HandleFunc("GET /api/sets/{set_id}", config.HandlerGetSetById)
+	//mux.HandleFunc("PUT /api/sets/{set_id}", config.HandlerUpdateSetById)
+	//mux.HandleFunc("DELETE /api/sets/{set_id}", config.HandlerDeleteSetById)
 
 	mux.HandleFunc("GET /api/progression_rules", config.HandlerGetAllProgressionRules)
 	mux.HandleFunc("POST /api/progression_rules", config.HandlerDevApplyProgressionRules)

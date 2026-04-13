@@ -51,3 +51,67 @@ func (q *Queries) CreateWorkout(ctx context.Context, arg CreateWorkoutParams) (W
 	)
 	return i, err
 }
+
+const deleteWorkoutById = `-- name: DeleteWorkoutById :exec
+DELETE FROM workouts
+WHERE id = $1
+`
+
+func (q *Queries) DeleteWorkoutById(ctx context.Context, id uuid.UUID) error {
+	_, err := q.db.ExecContext(ctx, deleteWorkoutById, id)
+	return err
+}
+
+const getAllWorkoutsByUserId = `-- name: GetAllWorkoutsByUserId :many
+SELECT id, user_id, started_at, ended_at, volume, prs FROM workouts
+WHERE user_id = $1
+`
+
+func (q *Queries) GetAllWorkoutsByUserId(ctx context.Context, userID uuid.UUID) ([]Workout, error) {
+	rows, err := q.db.QueryContext(ctx, getAllWorkoutsByUserId, userID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Workout
+	for rows.Next() {
+		var i Workout
+		if err := rows.Scan(
+			&i.ID,
+			&i.UserID,
+			&i.StartedAt,
+			&i.EndedAt,
+			&i.Volume,
+			&i.Prs,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const getWorkoutById = `-- name: GetWorkoutById :one
+SELECT id, user_id, started_at, ended_at, volume, prs FROM workouts
+WHERE id = $1
+`
+
+func (q *Queries) GetWorkoutById(ctx context.Context, id uuid.UUID) (Workout, error) {
+	row := q.db.QueryRowContext(ctx, getWorkoutById, id)
+	var i Workout
+	err := row.Scan(
+		&i.ID,
+		&i.UserID,
+		&i.StartedAt,
+		&i.EndedAt,
+		&i.Volume,
+		&i.Prs,
+	)
+	return i, err
+}

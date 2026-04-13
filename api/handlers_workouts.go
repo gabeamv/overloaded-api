@@ -71,3 +71,81 @@ func (c *Config) HandlerAddWorkout(w http.ResponseWriter, r *http.Request) {
 	}
 	ResponseJSON(w, http.StatusOK, resp)
 }
+
+func (c *Config) HandlerGetAllWorkouts(w http.ResponseWriter, r *http.Request) {
+	userId, err := auth.GetAndValidateToken(r.Header, c.Secret)
+	if err != nil {
+		err = fmt.Errorf("error getting and validating token: %w", err)
+		ResponseError(w, http.StatusUnauthorized, err.Error(), err)
+		return
+	}
+	workouts, err := c.DbQueries.GetAllWorkoutsByUserId(context.Background(), userId)
+	if err != nil {
+		err = fmt.Errorf("error getting all workouts for user '%v': %w", userId, err)
+		ResponseError(w, http.StatusInternalServerError, err.Error(), err)
+		return
+	}
+	var resp []workoutResp
+	for _, workout := range workouts {
+		resp = append(resp, workoutResp{
+			Id:        workout.ID,
+			UserId:    workout.UserID,
+			StartedAt: workout.StartedAt,
+			EndedAt:   workout.EndedAt,
+			Volume:    workout.Volume,
+			Prs:       workout.Prs,
+		})
+	}
+	ResponseJSON(w, http.StatusAccepted, resp)
+}
+
+func (c *Config) HandlerGetWorkoutById(w http.ResponseWriter, r *http.Request) {
+	userId, err := auth.GetAndValidateToken(r.Header, c.Secret)
+	if err != nil {
+		err = fmt.Errorf("error getting and validating token: %w", err)
+		ResponseError(w, http.StatusUnauthorized, err.Error(), err)
+		return
+	}
+	id, err := uuid.Parse(r.PathValue("workout_id"))
+	if err != nil {
+		err = fmt.Errorf("error parsing path value 'workout_id' into type UUID: %w", err)
+		ResponseError(w, http.StatusNotFound, err.Error(), err)
+		return
+	}
+	workout, err := c.DbQueries.GetWorkoutById(context.Background(), id)
+	if err != nil {
+		err = fmt.Errorf("error getting workout for user '%v': %w", userId, err)
+		ResponseError(w, http.StatusInternalServerError, err.Error(), err)
+		return
+	}
+	ResponseJSON(w, http.StatusAccepted, workoutResp{
+		Id:        workout.ID,
+		UserId:    workout.UserID,
+		StartedAt: workout.StartedAt,
+		EndedAt:   workout.EndedAt,
+		Volume:    workout.Volume,
+		Prs:       workout.Prs,
+	})
+}
+
+func (c *Config) HandlerDeleteWorkoutById(w http.ResponseWriter, r *http.Request) {
+	userId, err := auth.GetAndValidateToken(r.Header, c.Secret)
+	if err != nil {
+		err = fmt.Errorf("error getting and validating token: %w", err)
+		ResponseError(w, http.StatusUnauthorized, err.Error(), err)
+		return
+	}
+	id, err := uuid.Parse(r.PathValue("workout_id"))
+	if err != nil {
+		err = fmt.Errorf("error parsing path value 'workout_id' into type UUID: %w", err)
+		ResponseError(w, http.StatusNotFound, err.Error(), err)
+		return
+	}
+	err = c.DbQueries.DeleteWorkoutById(context.Background(), id)
+	if err != nil {
+		err = fmt.Errorf("error deleting workout '%v' for user '%v': %w", id, userId, err)
+		ResponseError(w, http.StatusInternalServerError, err.Error(), err)
+		return
+	}
+	ResponseJSON(w, http.StatusNoContent, struct{}{})
+}

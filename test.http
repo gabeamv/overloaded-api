@@ -69,3 +69,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZ
     "volume": 1000,
     "prs": 2
 }
+###
+GET {{host}}/api/workouts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiYzc4MjNjMjMtOWY4OS00ZjYwLTgwZjQtNDRiMTg1OTEyNTc5IiwiZXhwIjoxNzc1Njk3MTc5LCJpYXQiOjE3NzU2OTM1Nzl9.Cr221yl6SrmHMGweH2MM0XNRAJ4EfFLw4ut2Nx1WGt4
+###
+GET {{host}}/api/workouts/workout_id
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiYzc4MjNjMjMtOWY4OS00ZjYwLTgwZjQtNDRiMTg1OTEyNTc5IiwiZXhwIjoxNzc1Njk3MTc5LCJpYXQiOjE3NzU2OTM1Nzl9.Cr221yl6SrmHMGweH2MM0XNRAJ4EfFLw4ut2Nx1WGt4
+###
+DELETE {{host}}/api/workouts/workouts_id
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiYzc4MjNjMjMtOWY4OS00ZjYwLTgwZjQtNDRiMTg1OTEyNTc5IiwiZXhwIjoxNzc1Njk3MTc5LCJpYXQiOjE3NzU2OTM1Nzl9.Cr221yl6SrmHMGweH2MM0XNRAJ4EfFLw4ut2Nx1WGt4
