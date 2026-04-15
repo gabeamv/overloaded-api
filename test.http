@@ -21,7 +21,7 @@ DELETE {{host}}/admin/reset
 ###
 POST {{host}}/api/exercises
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiMDQwNWY3NWQtZjQzMS00ZmEwLThiNTgtMDA0MTJhNDNlYjI0IiwiZXhwIjoxNzc2MDcwMjU0LCJpYXQiOjE3NzYwNjY2NTR9.V4GfQWMrnR8mBsVvkYWQrt1c7cHEB_chLh1CcFoah48
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiOTQyOGUzYzEtNWI1Ni00NWZhLWJmODEtMzYyYWFmZTQxMDYxIiwiZXhwIjoxNzc2MjQ0Mjg1LCJpYXQiOjE3NzYyNDA2ODV9.brMqLjwEqee0_0teYtQ-U9_qxrLieCiI1U_Vfp7yI0c
 
 {
     "name": "push",
@@ -30,7 +30,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZ
 ###
 GET {{host}}/api/exercises
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiMDQwNWY3NWQtZjQzMS00ZmEwLThiNTgtMDA0MTJhNDNlYjI0IiwiZXhwIjoxNzc2MDcwMjU0LCJpYXQiOjE3NzYwNjY2NTR9.V4GfQWMrnR8mBsVvkYWQrt1c7cHEB_chLh1CcFoah48
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiOTQyOGUzYzEtNWI1Ni00NWZhLWJmODEtMzYyYWFmZTQxMDYxIiwiZXhwIjoxNzc2MjQ0Mjg1LCJpYXQiOjE3NzYyNDA2ODV9.brMqLjwEqee0_0teYtQ-U9_qxrLieCiI1U_Vfp7yI0c
 ###
 GET {{host}}/api/exercises/25a0646a-33e3-443a-906c-faa775c92ecd
 Content-Type: application/json
@@ -56,14 +56,14 @@ Content-Type: application/json
 ###
 GET {{host}}/api/progression_rules
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiMDQwNWY3NWQtZjQzMS00ZmEwLThiNTgtMDA0MTJhNDNlYjI0IiwiZXhwIjoxNzc2MDcwMjU0LCJpYXQiOjE3NzYwNjY2NTR9.V4GfQWMrnR8mBsVvkYWQrt1c7cHEB_chLh1CcFoah48
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiOTQyOGUzYzEtNWI1Ni00NWZhLWJmODEtMzYyYWFmZTQxMDYxIiwiZXhwIjoxNzc2MjQ0Mjg1LCJpYXQiOjE3NzYyNDA2ODV9.brMqLjwEqee0_0teYtQ-U9_qxrLieCiI1U_Vfp7yI0c
 ###
 POST {{host}}/api/workouts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiMDQwNWY3NWQtZjQzMS00ZmEwLThiNTgtMDA0MTJhNDNlYjI0IiwiZXhwIjoxNzc2MDcwMjU0LCJpYXQiOjE3NzYwNjY2NTR9.V4GfQWMrnR8mBsVvkYWQrt1c7cHEB_chLh1CcFoah48
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiOTQyOGUzYzEtNWI1Ni00NWZhLWJmODEtMzYyYWFmZTQxMDYxIiwiZXhwIjoxNzc2MjQ0Mjg1LCJpYXQiOjE3NzYyNDA2ODV9.brMqLjwEqee0_0teYtQ-U9_qxrLieCiI1U_Vfp7yI0c
 
 {
-    "user_id": "0405f75d-f431-4fa0-8b58-00412a43eb24",
+    "user_id": "9428e3c1-5b56-45fa-bf81-362aafe41061",
     "started_at": "2026-04-08T16:30:00Z",
     "ended_at": "2026-04-08T16:40:00Z",
     "volume": 1000,
@@ -72,7 +72,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZ
 ###
 GET {{host}}/api/workouts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiMDQwNWY3NWQtZjQzMS00ZmEwLThiNTgtMDA0MTJhNDNlYjI0IiwiZXhwIjoxNzc2MDcwMjU0LCJpYXQiOjE3NzYwNjY2NTR9.V4GfQWMrnR8mBsVvkYWQrt1c7cHEB_chLh1CcFoah48
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiOTQyOGUzYzEtNWI1Ni00NWZhLWJmODEtMzYyYWFmZTQxMDYxIiwiZXhwIjoxNzc2MjQ0Mjg1LCJpYXQiOjE3NzYyNDA2ODV9.brMqLjwEqee0_0teYtQ-U9_qxrLieCiI1U_Vfp7yI0c
 ###
 GET {{host}}/api/workouts/5349f67f-3150-4ab7-baa1-43e252b76904
 Content-Type: application/json
@@ -82,16 +82,40 @@ DELETE {{host}}/api/workouts/f74797af-e1cf-412a-a2e5-6263c6262272
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiNGI3ZmFiOGQtZTc2OS00ZGNkLTk3MDAtMTAyZDZmMjMwNTFiIiwiZXhwIjoxNzc2MDUyMzkzLCJpYXQiOjE3NzYwNDg3OTN9.Wa-E1RXkwXjeyDE6N8nBrc-v2ZH8Cq-lfvrxYlOHfAI
 ###
-POST {{host}}/api/workouts/5349f67f-3150-4ab7-baa1-43e252b76904/sets
+POST {{host}}/api/workouts/75ba9916-0b6c-49b1-ad48-ffa5b318b316/sets
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiMDQwNWY3NWQtZjQzMS00ZmEwLThiNTgtMDA0MTJhNDNlYjI0IiwiZXhwIjoxNzc2MDcwMjU0LCJpYXQiOjE3NzYwNjY2NTR9.V4GfQWMrnR8mBsVvkYWQrt1c7cHEB_chLh1CcFoah48
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiOTQyOGUzYzEtNWI1Ni00NWZhLWJmODEtMzYyYWFmZTQxMDYxIiwiZXhwIjoxNzc2MjQ0Mjg1LCJpYXQiOjE3NzYyNDA2ODV9.brMqLjwEqee0_0teYtQ-U9_qxrLieCiI1U_Vfp7yI0c
 
 {
     
-	"exercise_id": "5f67bbdc-292a-48e1-80d3-1b9337ffe37f",
+	"exercise_id": "0bb93ab5-8b3a-46e5-a9db-1a34213d5f71",
 	"progress_track": "a2658d67-d266-461b-95c1-7e8769079a2a",
 	"weight_in_lbs": 225,
 	"reps": 5,
 	"time_in_seconds": 0
 	
 }
+###
+GET {{host}}/api/workouts/75ba9916-0b6c-49b1-ad48-ffa5b318b316/sets
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiOTQyOGUzYzEtNWI1Ni00NWZhLWJmODEtMzYyYWFmZTQxMDYxIiwiZXhwIjoxNzc2MjQ0Mjg1LCJpYXQiOjE3NzYyNDA2ODV9.brMqLjwEqee0_0teYtQ-U9_qxrLieCiI1U_Vfp7yI0c
+###
+GET {{host}}/api/sets/5e764b8b-f371-4d6b-806f-325de6392372
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiOTQyOGUzYzEtNWI1Ni00NWZhLWJmODEtMzYyYWFmZTQxMDYxIiwiZXhwIjoxNzc2MjQ0Mjg1LCJpYXQiOjE3NzYyNDA2ODV9.brMqLjwEqee0_0teYtQ-U9_qxrLieCiI1U_Vfp7yI0c
+###
+PUT {{host}}/api/sets/6d8af7b1-76fc-4562-ae75-30c1bffb8206
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiOTQyOGUzYzEtNWI1Ni00NWZhLWJmODEtMzYyYWFmZTQxMDYxIiwiZXhwIjoxNzc2MjQ0Mjg1LCJpYXQiOjE3NzYyNDA2ODV9.brMqLjwEqee0_0teYtQ-U9_qxrLieCiI1U_Vfp7yI0c
+
+{
+    "exercise_id": "0bb93ab5-8b3a-46e5-a9db-1a34213d5f71",
+    "progress_track": "a2658d67-d266-461b-95c1-7e8769079a2a",
+    "weight_in_lbs": 185,
+    "reps": 12,
+    "time_in_seconds": 0
+}
+###
+DELETE {{host}}/api/sets/5e764b8b-f371-4d6b-806f-325de6392372
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiOTQyOGUzYzEtNWI1Ni00NWZhLWJmODEtMzYyYWFmZTQxMDYxIiwiZXhwIjoxNzc2MjQ0Mjg1LCJpYXQiOjE3NzYyNDA2ODV9.brMqLjwEqee0_0teYtQ-U9_qxrLieCiI1U_Vfp7yI0c

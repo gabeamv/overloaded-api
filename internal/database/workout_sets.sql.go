@@ -54,3 +54,107 @@ func (q *Queries) CreateWorkoutSetByWorkoutId(ctx context.Context, arg CreateWor
 	)
 	return i, err
 }
+
+const deleteSetById = `-- name: DeleteSetById :exec
+DELETE FROM workout_sets
+WHERE id = $1
+`
+
+func (q *Queries) DeleteSetById(ctx context.Context, id uuid.UUID) error {
+	_, err := q.db.ExecContext(ctx, deleteSetById, id)
+	return err
+}
+
+const getSetById = `-- name: GetSetById :one
+SELECT id, workout_id, exercise_id, progress_track, weight_in_lbs, reps, time_in_seconds FROM workout_sets
+WHERE id = $1
+`
+
+func (q *Queries) GetSetById(ctx context.Context, id uuid.UUID) (WorkoutSet, error) {
+	row := q.db.QueryRowContext(ctx, getSetById, id)
+	var i WorkoutSet
+	err := row.Scan(
+		&i.ID,
+		&i.WorkoutID,
+		&i.ExerciseID,
+		&i.ProgressTrack,
+		&i.WeightInLbs,
+		&i.Reps,
+		&i.TimeInSeconds,
+	)
+	return i, err
+}
+
+const getSetsByWorkoutId = `-- name: GetSetsByWorkoutId :many
+SELECT id, workout_id, exercise_id, progress_track, weight_in_lbs, reps, time_in_seconds FROM workout_sets
+WHERE workout_id = $1
+`
+
+func (q *Queries) GetSetsByWorkoutId(ctx context.Context, workoutID uuid.UUID) ([]WorkoutSet, error) {
+	rows, err := q.db.QueryContext(ctx, getSetsByWorkoutId, workoutID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []WorkoutSet
+	for rows.Next() {
+		var i WorkoutSet
+		if err := rows.Scan(
+			&i.ID,
+			&i.WorkoutID,
+			&i.ExerciseID,
+			&i.ProgressTrack,
+			&i.WeightInLbs,
+			&i.Reps,
+			&i.TimeInSeconds,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const updateSetById = `-- name: UpdateSetById :one
+UPDATE workout_sets
+SET exercise_id = $2, progress_track = $3, weight_in_lbs = $4, reps = $5, time_in_seconds = $6
+WHERE id = $1
+RETURNING id, workout_id, exercise_id, progress_track, weight_in_lbs, reps, time_in_seconds
+`
+
+type UpdateSetByIdParams struct {
+	ID            uuid.UUID
+	ExerciseID    uuid.UUID
+	ProgressTrack uuid.UUID
+	WeightInLbs   float64
+	Reps          float64
+	TimeInSeconds float64
+}
+
+func (q *Queries) UpdateSetById(ctx context.Context, arg UpdateSetByIdParams) (WorkoutSet, error) {
+	row := q.db.QueryRowContext(ctx, updateSetById,
+		arg.ID,
+		arg.ExerciseID,
+		arg.ProgressTrack,
+		arg.WeightInLbs,
+		arg.Reps,
+		arg.TimeInSeconds,
+	)
+	var i WorkoutSet
+	err := row.Scan(
+		&i.ID,
+		&i.WorkoutID,
+		&i.ExerciseID,
+		&i.ProgressTrack,
+		&i.WeightInLbs,
+		&i.Reps,
+		&i.TimeInSeconds,
+	)
+	return i, err
+}
