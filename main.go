@@ -59,8 +59,8 @@ func main() {
 	mux.HandleFunc("POST /api/progression_rules", config.HandlerDevApplyProgressionRules)
 	mux.HandleFunc("DELETE /api/progression_rules", config.HandlerDevResetProgressionRules)
 
-	//mux.HandleFunc("GET /api/exercises/{exercise_id}/1rm", config.HandlerGetPrOneRepMax)
-	//mux.HandleFunc("GET /api/exercises/{exercise_id}/volume", config.HandlerGetPrVolume)
+	mux.HandleFunc("GET /api/exercises/{exercise_id}/1rm", config.HandlerGetPrOneRepMax)
+	mux.HandleFunc("GET /api/exercises/{exercise_id}/volume", config.HandlerGetPrVolume)
 
 	server := &http.Server{
 		Handler: mux,
