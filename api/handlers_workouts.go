@@ -23,7 +23,6 @@ type workoutResp struct {
 
 func (c *Config) HandlerAddWorkout(w http.ResponseWriter, r *http.Request) {
 	type request struct {
-		UserId    uuid.UUID `json:"user_id"`
 		StartedAt time.Time `json:"started_at"`
 		EndedAt   time.Time `json:"ended_at"`
 		Volume    int32     `json:"volume"`
@@ -44,13 +43,8 @@ func (c *Config) HandlerAddWorkout(w http.ResponseWriter, r *http.Request) {
 		ResponseError(w, http.StatusInternalServerError, err.Error(), err)
 		return
 	}
-	if userId != req.UserId {
-		err = fmt.Errorf("error, unauthorized request for user '%v' to add workout for user '%v'.", userId, req.UserId)
-		ResponseError(w, http.StatusUnauthorized, err.Error(), err)
-		return
-	}
 	workout, err := c.DbQueries.CreateWorkout(context.Background(), database.CreateWorkoutParams{
-		UserID:    req.UserId,
+		UserID:    userId,
 		StartedAt: req.StartedAt,
 		EndedAt:   req.EndedAt,
 		Volume:    req.Volume,

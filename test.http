@@ -60,10 +60,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZ
 ###
 POST {{host}}/api/workouts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiOTQyOGUzYzEtNWI1Ni00NWZhLWJmODEtMzYyYWFmZTQxMDYxIiwiZXhwIjoxNzc2MjQ0Mjg1LCJpYXQiOjE3NzYyNDA2ODV9.brMqLjwEqee0_0teYtQ-U9_qxrLieCiI1U_Vfp7yI0c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiYjQ2ZDFjYWMtYjVhMS00ZjgzLWE5MTktMDgwZGM5MjcxNTVlIiwiZXhwIjoxNzc2Mzk0ODE1LCJpYXQiOjE3NzYzOTEyMTV9.06WiVElicCmogBmbV4I9Fo1JxhIv0QUFZrVVnOIA7R0
 
 {
-    "user_id": "9428e3c1-5b56-45fa-bf81-362aafe41061",
     "started_at": "2026-04-08T16:30:00Z",
     "ended_at": "2026-04-08T16:40:00Z",
     "volume": 1000,
@@ -72,7 +71,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZ
 ###
 GET {{host}}/api/workouts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiOTQyOGUzYzEtNWI1Ni00NWZhLWJmODEtMzYyYWFmZTQxMDYxIiwiZXhwIjoxNzc2MjQ0Mjg1LCJpYXQiOjE3NzYyNDA2ODV9.brMqLjwEqee0_0teYtQ-U9_qxrLieCiI1U_Vfp7yI0c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiYjQ2ZDFjYWMtYjVhMS00ZjgzLWE5MTktMDgwZGM5MjcxNTVlIiwiZXhwIjoxNzc2Mzk0ODE1LCJpYXQiOjE3NzYzOTEyMTV9.06WiVElicCmogBmbV4I9Fo1JxhIv0QUFZrVVnOIA7R0
 ###
 GET {{host}}/api/workouts/5349f67f-3150-4ab7-baa1-43e252b76904
 Content-Type: application/json
