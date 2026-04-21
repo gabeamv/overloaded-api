@@ -28,7 +28,10 @@ func main() {
 	}
 	secret := os.Getenv("SECRET")
 	queries := database.New(db)
-	config := api.Config{DbQueries: queries, Secret: secret}
+	config := api.Config{
+		Db:        db,
+		DbQueries: queries,
+		Secret:    secret}
 
 	mux := http.NewServeMux()
 
@@ -50,6 +53,7 @@ func main() {
 	mux.HandleFunc("DELETE /api/workouts/{workout_id}", config.HandlerDeleteWorkoutById)
 
 	mux.HandleFunc("POST /api/workouts/{workout_id}/sets", config.HandlerAddSetByWorkoutId)
+	mux.HandleFunc("POST /api/workouts/{workout_id}/sets/batch", config.HandlerAddSetsBatchByWorkoutId) // test
 	mux.HandleFunc("GET /api/workouts/{workout_id}/sets", config.HandlerGetSetsByWorkoutId)
 	mux.HandleFunc("GET /api/sets/{set_id}", config.HandlerGetSetById)
 	mux.HandleFunc("PUT /api/sets/{set_id}", config.HandlerUpdateSetById)

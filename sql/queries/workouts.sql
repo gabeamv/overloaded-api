@@ -20,3 +20,9 @@ WHERE id = $1;
 -- name: DeleteWorkoutById :exec
 DELETE FROM workouts
 WHERE id = $1;
+
+-- name: UpdateWorkoutPrVolumeById :one
+UPDATE workouts
+SET volume = $2, prs = $3
+WHERE id = $1
+RETURNING *;

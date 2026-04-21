@@ -115,3 +115,30 @@ func (q *Queries) GetWorkoutById(ctx context.Context, id uuid.UUID) (Workout, er
 	)
 	return i, err
 }
+
+const updateWorkoutPrVolumeById = `-- name: UpdateWorkoutPrVolumeById :one
+UPDATE workouts
+SET volume = $2, prs = $3
+WHERE id = $1
+RETURNING id, user_id, started_at, ended_at, volume, prs
+`
+
+type UpdateWorkoutPrVolumeByIdParams struct {
+	ID     uuid.UUID
+	Volume int32
+	Prs    int32
+}
+
+func (q *Queries) UpdateWorkoutPrVolumeById(ctx context.Context, arg UpdateWorkoutPrVolumeByIdParams) (Workout, error) {
+	row := q.db.QueryRowContext(ctx, updateWorkoutPrVolumeById, arg.ID, arg.Volume, arg.Prs)
+	var i Workout
+	err := row.Scan(
+		&i.ID,
+		&i.UserID,
+		&i.StartedAt,
+		&i.EndedAt,
+		&i.Volume,
+		&i.Prs,
+	)
+	return i, err
+}

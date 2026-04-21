@@ -12,7 +12,10 @@ import (
 )
 
 const getPrOneRepMaxByExerciseIdUserId = `-- name: GetPrOneRepMaxByExerciseIdUserId :one
-SELECT ROUND(MAX(workout_sets.weight_in_lbs * (1 + (workout_sets.reps / 30.0))), 2) as orm
+SELECT COALESCE(
+    ROUND(MAX(workout_sets.weight_in_lbs * (1 + (workout_sets.reps / 30.0))), 2),
+    0.0
+)::DOUBLE PRECISION as orm
 FROM workout_sets 
     INNER JOIN workouts 
         ON workout_sets.workout_id = workouts.id
@@ -25,15 +28,18 @@ type GetPrOneRepMaxByExerciseIdUserIdParams struct {
 	UserID     uuid.UUID
 }
 
-func (q *Queries) GetPrOneRepMaxByExerciseIdUserId(ctx context.Context, arg GetPrOneRepMaxByExerciseIdUserIdParams) (string, error) {
+func (q *Queries) GetPrOneRepMaxByExerciseIdUserId(ctx context.Context, arg GetPrOneRepMaxByExerciseIdUserIdParams) (float64, error) {
 	row := q.db.QueryRowContext(ctx, getPrOneRepMaxByExerciseIdUserId, arg.ExerciseID, arg.UserID)
-	var orm string
+	var orm float64
 	err := row.Scan(&orm)
 	return orm, err
 }
 
 const getPrVolumeByExerciseIdUserId = `-- name: GetPrVolumeByExerciseIdUserId :one
-SELECT ROUND(MAX(workout_sets.weight_in_lbs * workout_sets.reps), 2) as volume
+SELECT COALESCE(
+    ROUND(MAX(workout_sets.weight_in_lbs * workout_sets.reps), 2),
+    0.0
+)::DOUBLE PRECISION as volume
 FROM workout_sets 
     INNER JOIN workouts 
         ON workout_sets.workout_id = workouts.id
@@ -46,9 +52,9 @@ type GetPrVolumeByExerciseIdUserIdParams struct {
 	UserID     uuid.UUID
 }
 
-func (q *Queries) GetPrVolumeByExerciseIdUserId(ctx context.Context, arg GetPrVolumeByExerciseIdUserIdParams) (string, error) {
+func (q *Queries) GetPrVolumeByExerciseIdUserId(ctx context.Context, arg GetPrVolumeByExerciseIdUserIdParams) (float64, error) {
 	row := q.db.QueryRowContext(ctx, getPrVolumeByExerciseIdUserId, arg.ExerciseID, arg.UserID)
-	var volume string
+	var volume float64
 	err := row.Scan(&volume)
 	return volume, err
 }

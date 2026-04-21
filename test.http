@@ -1,5 +1,9 @@
 @host = http://localhost:8080
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiM2I3NjExNzUtYWNlMC00NTAyLWI2NjQtZDE3MjFiNzNjNzk3IiwiZXhwIjoxNzc2NDEzODY4LCJpYXQiOjE3NzY0MTAyNjh9.H_2htH8-NuH87ygBQTfaR3wv4S_G8ieZXaeiVXNSw_Q
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiMDEyNWY1NTgtZDIzZS00OWMyLWE0ZjgtZTFiYjhkMDQ5ZWEwIiwiZXhwIjoxNzc2NzU0MzgzLCJpYXQiOjE3NzY3NTA3ODN9.H8GTcZL-aARVe0_Y2d-otVQvRWEw8G_8HEHP-aCH0C4
+@workout_id = 210a24d2-aca6-455d-822c-fe9877f8028a
+@exercise_id_a = "de6f5a69-c437-496d-a452-d75dd8db83b9"
+@exercise_id_b = "5e7dbcbf-5bfa-42ea-9ab3-f632a50cd64c"
+@prog_track = "5c4c46da-39e8-4b65-a362-fa25f4f99ff6"
 
 POST {{host}}/api/users/register
 Content-Type: application/json
@@ -26,6 +30,15 @@ Authorization: Bearer {{token}}
 
 {
     "name": "push",
+    "is_custom": true
+}
+###
+POST {{host}}/api/exercises
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "pull",
     "is_custom": true
 }
 ###
@@ -66,15 +79,15 @@ Authorization: Bearer {{token}}
 {
     "started_at": "2026-04-08T16:30:00Z",
     "ended_at": "2026-04-08T16:40:00Z",
-    "volume": 1000,
-    "prs": 2
+    "volume": 0,
+    "prs": 0
 }
 ###
 GET {{host}}/api/workouts
 Content-Type: application/json
 Authorization: Bearer {{token}}
 ###
-GET {{host}}/api/workouts/5349f67f-3150-4ab7-baa1-43e252b76904
+GET {{host}}/api/workouts/e425c89a-f7d8-432b-992f-a58afd9673f3
 Content-Type: application/json
 Authorization: Bearer {{token}}
 ###
@@ -82,7 +95,7 @@ DELETE {{host}}/api/workouts/f74797af-e1cf-412a-a2e5-6263c6262272
 Content-Type: application/json
 Authorization: Bearer {{token}}
 ###
-POST {{host}}/api/workouts/592967f4-f9ca-4fba-86b2-06e860b2332d/sets
+POST {{host}}/api/workouts/e425c89a-f7d8-432b-992f-a58afd9673f3/sets
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -96,7 +109,35 @@ Authorization: Bearer {{token}}
 	
 }
 ###
-GET {{host}}/api/workouts/592967f4-f9ca-4fba-86b2-06e860b2332d/sets
+POST {{host}}/api/workouts/{{workout_id}}/sets/batch
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "sets": [
+        {
+        
+        "exercise_id": {{exercise_id_a}},
+        "progress_track": {{prog_track}},
+        "weight_in_lbs": 250,
+        "reps": 5,
+        "time_in_seconds": 0
+        
+        },
+        {
+        
+        "exercise_id": {{exercise_id_b}},
+        "progress_track": {{prog_track}},
+        "weight_in_lbs": 250,
+        "reps": 8,
+        "time_in_seconds": 0
+        
+        }
+    ]
+}
+
+###
+GET {{host}}/api/workouts/{{workout_id}}/sets
 Content-Type: application/json
 Authorization: Bearer {{token}}
 ###
@@ -120,10 +161,10 @@ DELETE {{host}}/api/sets/5e764b8b-f371-4d6b-806f-325de6392372
 Content-Type: application/json
 Authorization: Bearer {{token}}
 ###
-GET {{host}}/api/exercises/7d0b720b-73ab-4a61-b43b-6496f50e4713/1rm
+GET {{host}}/api/exercises/{{exercise_id_a}}/1rm
 Content-Type: application/json
 Authorization: Bearer {{token}}
 ###
-GET {{host}}/api/exercises/7d0b720b-73ab-4a61-b43b-6496f50e4713/volume
+GET {{host}}/api/exercises/{{exercise_id_a}}/volume
 Content-Type: application/json
 Authorization: Bearer {{token}}

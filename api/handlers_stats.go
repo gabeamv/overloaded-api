@@ -3,8 +3,8 @@ package api
 import (
 	"context"
 	"fmt"
+	"math"
 	"net/http"
-	"strconv"
 
 	"github.com/gabeamv/overloaded-api/internal/auth"
 	"github.com/gabeamv/overloaded-api/internal/database"
@@ -28,7 +28,7 @@ func (c *Config) HandlerGetPrOneRepMax(w http.ResponseWriter, r *http.Request) {
 		ResponseError(w, http.StatusNotFound, err.Error(), err)
 		return
 	}
-	strOrm, err := c.DbQueries.GetPrOneRepMaxByExerciseIdUserId(context.Background(), database.GetPrOneRepMaxByExerciseIdUserIdParams{
+	oneRepMax, err := c.DbQueries.GetPrOneRepMaxByExerciseIdUserId(context.Background(), database.GetPrOneRepMaxByExerciseIdUserIdParams{
 		ExerciseID: exerciseId,
 		UserID:     userId,
 	})
@@ -37,13 +37,7 @@ func (c *Config) HandlerGetPrOneRepMax(w http.ResponseWriter, r *http.Request) {
 		ResponseError(w, http.StatusInternalServerError, err.Error(), err)
 		return
 	}
-	orm, err := strconv.ParseFloat(strOrm, 64)
-	if err != nil {
-		err = fmt.Errorf("error parsing string one rep max to float64: %w", err)
-		ResponseError(w, http.StatusInternalServerError, err.Error(), err)
-		return
-	}
-	ResponseJSON(w, http.StatusAccepted, resp{OneRepMax: orm})
+	ResponseJSON(w, http.StatusAccepted, resp{OneRepMax: oneRepMax})
 }
 
 // Calculates most volume done for a set of a specific exercise.
@@ -63,7 +57,7 @@ func (c *Config) HandlerGetPrVolume(w http.ResponseWriter, r *http.Request) {
 		ResponseError(w, http.StatusNotFound, err.Error(), err)
 		return
 	}
-	strVolumeMax, err := c.DbQueries.GetPrVolumeByExerciseIdUserId(context.Background(), database.GetPrVolumeByExerciseIdUserIdParams{
+	volumeMax, err := c.DbQueries.GetPrVolumeByExerciseIdUserId(context.Background(), database.GetPrVolumeByExerciseIdUserIdParams{
 		ExerciseID: exerciseId,
 		UserID:     userId,
 	})
@@ -72,11 +66,9 @@ func (c *Config) HandlerGetPrVolume(w http.ResponseWriter, r *http.Request) {
 		ResponseError(w, http.StatusInternalServerError, err.Error(), err)
 		return
 	}
-	volumeMax, err := strconv.ParseFloat(strVolumeMax, 64)
-	if err != nil {
-		err = fmt.Errorf("error parsing string volume max to float64: %w", err)
-		ResponseError(w, http.StatusInternalServerError, err.Error(), err)
-		return
-	}
 	ResponseJSON(w, http.StatusAccepted, resp{VolumeMax: volumeMax})
+}
+
+func roundToTwo(x float64) float64 {
+	return math.Round(x*100) / 100
 }

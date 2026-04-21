@@ -4,8 +4,8 @@ CREATE TABLE workouts (
     user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     started_at TIMESTAMP NOT NULL,
     ended_at TIMESTAMP NOT NULL,
-    volume INTEGER NOT NULL,
-    prs INTEGER NOT NULL
+    volume INTEGER NOT NULL DEFAULT 0,
+    prs INTEGER NOT NULL DEFAULT 0
 );
 
 -- +goose Down

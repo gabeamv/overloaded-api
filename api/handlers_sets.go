@@ -278,3 +278,132 @@ func (c *Config) HandlerDeleteSetById(w http.ResponseWriter, r *http.Request) {
 	}
 	ResponseJSON(w, http.StatusNoContent, struct{}{})
 }
+
+// TODO: posting a batch assumes this is the only batch of sets that will be tied to a workout. need a way to limit calling post subsequent times for accurate data.
+func (c *Config) HandlerAddSetsBatchByWorkoutId(w http.ResponseWriter, r *http.Request) {
+	type setRequest struct {
+		ExerciseId    uuid.UUID `json:"exercise_id"`
+		ProgressTrack uuid.UUID `json:"progress_track"`
+		WeightInLbs   float64   `json:"weight_in_lbs"`
+		Reps          float64   `json:"reps"`
+		TimeInSeconds float64   `json:"time_in_seconds"`
+	}
+	type request struct {
+		Sets []setRequest `json:"sets"`
+	}
+	userId, err := auth.GetAndValidateToken(r.Header, c.Secret)
+	if err != nil {
+		err = fmt.Errorf("error getting and validating token: %w", err)
+		ResponseError(w, http.StatusUnauthorized, err.Error(), err)
+		return
+	}
+	workoutId, err := uuid.Parse(r.PathValue("workout_id"))
+	if err != nil {
+		err = fmt.Errorf("error parsing path value 'workout_id' into type UUID: %w", err)
+		ResponseError(w, http.StatusNotFound, err.Error(), err)
+		return
+	}
+	var req request
+	decoder := json.NewDecoder(r.Body)
+	defer r.Body.Close()
+	err = decoder.Decode(&req)
+	if err != nil {
+		err := fmt.Errorf("error decoding workout sets request: %v", err)
+		ResponseError(w, http.StatusInternalServerError, err.Error(), err)
+		return
+	}
+	workout, err := c.DbQueries.GetWorkoutById(context.Background(), workoutId)
+	if err != nil {
+		err = fmt.Errorf("error getting workout '%v': %w", workoutId, err)
+		ResponseError(w, http.StatusInternalServerError, err.Error(), err)
+		return
+	}
+	if userId != workout.UserID {
+		err = fmt.Errorf("error, unauthorized request for user '%v' to add sets to workout belonging to user '%v'", userId, workout.UserID)
+		ResponseError(w, http.StatusUnauthorized, err.Error(), err)
+		return
+	}
+	// Begin transaction to validate every set.
+	tx, err := c.Db.BeginTx(context.Background(), nil)
+	if err != nil {
+		err = fmt.Errorf("error beginning transaction for creating sets for workout '%v': %w", workoutId, err)
+		ResponseError(w, http.StatusInternalServerError, err.Error(), err)
+		return
+	}
+	defer tx.Rollback()
+	q := c.DbQueries.WithTx(tx)
+	var resp []respWorkoutSet
+	prCount := 0
+	totalVolume := 0.0
+	for _, s := range req.Sets {
+		set, err := q.CreateWorkoutSetByWorkoutId(context.Background(), database.CreateWorkoutSetByWorkoutIdParams{
+			WorkoutID:     workoutId,
+			ExerciseID:    s.ExerciseId,
+			ProgressTrack: s.ProgressTrack,
+			WeightInLbs:   s.WeightInLbs,
+			Reps:          s.Reps,
+			TimeInSeconds: s.TimeInSeconds,
+		})
+		if err != nil {
+			err = fmt.Errorf("error creating creating workout set for workout '%v': %w", workoutId, err)
+			ResponseError(w, http.StatusInternalServerError, err.Error(), err)
+			return
+		}
+		currOneRepMax, err := c.DbQueries.GetPrOneRepMaxByExerciseIdUserId(context.Background(), database.GetPrOneRepMaxByExerciseIdUserIdParams{
+			ExerciseID: set.ExerciseID,
+			UserID:     userId,
+		})
+		if err != nil {
+			err = fmt.Errorf("error getting one rep max for exercise '%v' for user '%v' to compare with set '%v': %w", set.ExerciseID, userId, set.ID, err)
+			ResponseError(w, http.StatusInternalServerError, err.Error(), err)
+			return
+		}
+		currVolumeMax, err := c.DbQueries.GetPrVolumeByExerciseIdUserId(context.Background(), database.GetPrVolumeByExerciseIdUserIdParams{
+			ExerciseID: set.ExerciseID,
+			UserID:     userId,
+		})
+		if err != nil {
+			err = fmt.Errorf("error getting volume max for exercise '%v' for user '%v' to compare with set '%v': %w", set.ExerciseID, userId, set.ID, err)
+			ResponseError(w, http.StatusInternalServerError, err.Error(), err)
+			return
+		}
+		currOneRepMax = roundToTwo(currOneRepMax)
+		currVolumeMax = roundToTwo(currVolumeMax)
+		// epley formula for one rep max, as well as volume calculation
+		oneRepMaxEstimate := roundToTwo(set.WeightInLbs * (1 + (set.Reps / 30.0)))
+		volume := roundToTwo(set.WeightInLbs * set.Reps)
+		// compare current set with previous prs, count pr if pr achieved
+		if oneRepMaxEstimate > currOneRepMax {
+			prCount++
+		}
+		if volume > currVolumeMax {
+			prCount++
+		}
+		totalVolume += volume
+		resp = append(resp, respWorkoutSet{
+			Id:            set.ID,
+			WorkoutId:     workoutId,
+			ExerciseId:    set.ExerciseID,
+			ProgressTrack: set.ProgressTrack,
+			WeightInLbs:   set.WeightInLbs,
+			Reps:          set.Reps,
+			TimeInSeconds: set.TimeInSeconds,
+		})
+	}
+	_, err = q.UpdateWorkoutPrVolumeById(context.Background(), database.UpdateWorkoutPrVolumeByIdParams{
+		ID:     workoutId,
+		Volume: int32(totalVolume),
+		Prs:    int32(prCount),
+	})
+	if err != nil {
+		err = fmt.Errorf("error updating pr and volume for workout '%v': %w", workoutId, err)
+		ResponseError(w, http.StatusInternalServerError, err.Error(), err)
+		return
+	}
+	if err := tx.Commit(); err != nil {
+		err = fmt.Errorf("an error has occured for comitting the transaction which creates sets for workout '%v': %w", workoutId, err)
+		ResponseError(w, http.StatusInternalServerError, err.Error(), err)
+		return
+	}
+	ResponseJSON(w, http.StatusCreated, resp)
+}
