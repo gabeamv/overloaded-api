@@ -1,9 +1,9 @@
 @host = http://localhost:8080
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiMDEyNWY1NTgtZDIzZS00OWMyLWE0ZjgtZTFiYjhkMDQ5ZWEwIiwiZXhwIjoxNzc2NzU0MzgzLCJpYXQiOjE3NzY3NTA3ODN9.H8GTcZL-aARVe0_Y2d-otVQvRWEw8G_8HEHP-aCH0C4
-@workout_id = 210a24d2-aca6-455d-822c-fe9877f8028a
-@exercise_id_a = "de6f5a69-c437-496d-a452-d75dd8db83b9"
-@exercise_id_b = "5e7dbcbf-5bfa-42ea-9ab3-f632a50cd64c"
-@prog_track = "5c4c46da-39e8-4b65-a362-fa25f4f99ff6"
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiNTM5NWNjODMtNDNlMy00ODYxLTg1MTQtNzFhOTAzNmU4MjhkIiwiZXhwIjoxNzc2ODE3OTkyLCJpYXQiOjE3NzY4MTQzOTJ9.4fuRr-lWjy95y7qkTZ0kLiTg53lgh1rVCFtZiulmHIU
+@workout_id = 9d667d95-9c83-4c51-add4-83d0166914ef
+@exercise_id_a = "aaa9d580-9cb9-4b82-a43e-999da8f63ada"
+@exercise_id_b = "8fb51970-46a9-4fb9-bb95-95571b728a53"
+@prog_track = "d5ed01a7-a710-44cc-ad2f-7850d1916fe7"
 
 POST {{host}}/api/users/register
 Content-Type: application/json

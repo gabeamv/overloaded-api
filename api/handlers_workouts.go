@@ -13,12 +13,13 @@ import (
 )
 
 type workoutResp struct {
-	Id        uuid.UUID `json:"id"`
-	UserId    uuid.UUID `json:"user_id"`
-	StartedAt time.Time `json:"started_at"`
-	EndedAt   time.Time `json:"ended_at"`
-	Volume    int32     `json:"volume"`
-	Prs       int32     `json:"prs"`
+	Id          uuid.UUID `json:"id"`
+	UserId      uuid.UUID `json:"user_id"`
+	StartedAt   time.Time `json:"started_at"`
+	EndedAt     time.Time `json:"ended_at"`
+	Volume      int32     `json:"volume"`
+	Prs         int32     `json:"prs"`
+	IsCompleted bool      `json:"is_completed"`
 }
 
 func (c *Config) HandlerAddWorkout(w http.ResponseWriter, r *http.Request) {
@@ -56,12 +57,13 @@ func (c *Config) HandlerAddWorkout(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	resp := workoutResp{
-		Id:        workout.ID,
-		UserId:    workout.UserID,
-		StartedAt: workout.StartedAt,
-		EndedAt:   workout.EndedAt,
-		Volume:    workout.Volume,
-		Prs:       workout.Prs,
+		Id:          workout.ID,
+		UserId:      workout.UserID,
+		StartedAt:   workout.StartedAt,
+		EndedAt:     workout.EndedAt,
+		Volume:      workout.Volume,
+		Prs:         workout.Prs,
+		IsCompleted: workout.IsCompleted,
 	}
 	ResponseJSON(w, http.StatusCreated, resp)
 }
@@ -82,12 +84,13 @@ func (c *Config) HandlerGetAllWorkouts(w http.ResponseWriter, r *http.Request) {
 	var resp []workoutResp
 	for _, workout := range workouts {
 		resp = append(resp, workoutResp{
-			Id:        workout.ID,
-			UserId:    workout.UserID,
-			StartedAt: workout.StartedAt,
-			EndedAt:   workout.EndedAt,
-			Volume:    workout.Volume,
-			Prs:       workout.Prs,
+			Id:          workout.ID,
+			UserId:      workout.UserID,
+			StartedAt:   workout.StartedAt,
+			EndedAt:     workout.EndedAt,
+			Volume:      workout.Volume,
+			Prs:         workout.Prs,
+			IsCompleted: workout.IsCompleted,
 		})
 	}
 	ResponseJSON(w, http.StatusCreated, resp)
@@ -118,12 +121,13 @@ func (c *Config) HandlerGetWorkoutById(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	ResponseJSON(w, http.StatusAccepted, workoutResp{
-		Id:        workout.ID,
-		UserId:    workout.UserID,
-		StartedAt: workout.StartedAt,
-		EndedAt:   workout.EndedAt,
-		Volume:    workout.Volume,
-		Prs:       workout.Prs,
+		Id:          workout.ID,
+		UserId:      workout.UserID,
+		StartedAt:   workout.StartedAt,
+		EndedAt:     workout.EndedAt,
+		Volume:      workout.Volume,
+		Prs:         workout.Prs,
+		IsCompleted: workout.IsCompleted,
 	})
 }
 

@@ -26,3 +26,9 @@ UPDATE workouts
 SET volume = $2, prs = $3
 WHERE id = $1
 RETURNING *;
+
+-- name: UpdateWorkoutCompletedById :one
+UPDATE workouts
+SET is_completed = true
+WHERE id = $1
+RETURNING *;

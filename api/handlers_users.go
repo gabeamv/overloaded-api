@@ -125,7 +125,7 @@ func (c *Config) HandlerLoginUser(w http.ResponseWriter, r *http.Request) {
 		ExpireAt:  refreshExpire,
 	})
 	if err != nil {
-		err = fmt.Errorf("error adding refresh token to database for user '%v': %w", err)
+		err = fmt.Errorf("error adding refresh token to database for user '%v': %w", user.ID, err)
 		ResponseError(w, http.StatusInternalServerError, err.Error(), err)
 		return
 	}

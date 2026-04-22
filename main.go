@@ -40,6 +40,8 @@ func main() {
 	mux.HandleFunc("POST /api/users/login", config.HandlerLoginUser)
 	mux.HandleFunc("POST /api/users/register", config.HandlerRegisterUser)
 
+	mux.HandleFunc("POST /api/revoke", config.HandlerRevokeRefreshToken)
+
 	mux.HandleFunc("POST /api/exercises", config.HandlerAddExercise)
 	mux.HandleFunc("GET /api/exercises", config.HandlerGetAllCustomExercisesUserId)
 	mux.HandleFunc("GET /api/exercises/{exercise_id}", config.HandlerGetExerciseById)
@@ -52,12 +54,12 @@ func main() {
 	mux.HandleFunc("GET /api/workouts/{workout_id}", config.HandlerGetWorkoutById)
 	mux.HandleFunc("DELETE /api/workouts/{workout_id}", config.HandlerDeleteWorkoutById)
 
-	mux.HandleFunc("POST /api/workouts/{workout_id}/sets", config.HandlerAddSetByWorkoutId)
-	mux.HandleFunc("POST /api/workouts/{workout_id}/sets/batch", config.HandlerAddSetsBatchByWorkoutId) // test
+	//mux.HandleFunc("POST /api/workouts/{workout_id}/sets", config.HandlerAddSetByWorkoutId)
+	mux.HandleFunc("POST /api/workouts/{workout_id}/sets/batch", config.HandlerAddSetsBatchByWorkoutId)
 	mux.HandleFunc("GET /api/workouts/{workout_id}/sets", config.HandlerGetSetsByWorkoutId)
 	mux.HandleFunc("GET /api/sets/{set_id}", config.HandlerGetSetById)
-	mux.HandleFunc("PUT /api/sets/{set_id}", config.HandlerUpdateSetById)
-	mux.HandleFunc("DELETE /api/sets/{set_id}", config.HandlerDeleteSetById)
+	//mux.HandleFunc("PUT /api/sets/{set_id}", config.HandlerUpdateSetById)
+	//mux.HandleFunc("DELETE /api/sets/{set_id}", config.HandlerDeleteSetById)
 
 	mux.HandleFunc("GET /api/progression_rules", config.HandlerGetAllProgressionRules)
 	mux.HandleFunc("POST /api/progression_rules", config.HandlerDevApplyProgressionRules)

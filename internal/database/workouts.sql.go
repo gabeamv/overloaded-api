@@ -21,7 +21,7 @@ VALUES (
     $4,
     $5
 )
-RETURNING id, user_id, started_at, ended_at, volume, prs
+RETURNING id, user_id, started_at, ended_at, volume, prs, is_completed
 `
 
 type CreateWorkoutParams struct {
@@ -48,6 +48,7 @@ func (q *Queries) CreateWorkout(ctx context.Context, arg CreateWorkoutParams) (W
 		&i.EndedAt,
 		&i.Volume,
 		&i.Prs,
+		&i.IsCompleted,
 	)
 	return i, err
 }
@@ -63,7 +64,7 @@ func (q *Queries) DeleteWorkoutById(ctx context.Context, id uuid.UUID) error {
 }
 
 const getAllWorkoutsByUserId = `-- name: GetAllWorkoutsByUserId :many
-SELECT id, user_id, started_at, ended_at, volume, prs FROM workouts
+SELECT id, user_id, started_at, ended_at, volume, prs, is_completed FROM workouts
 WHERE user_id = $1
 `
 
@@ -83,6 +84,7 @@ func (q *Queries) GetAllWorkoutsByUserId(ctx context.Context, userID uuid.UUID) 
 			&i.EndedAt,
 			&i.Volume,
 			&i.Prs,
+			&i.IsCompleted,
 		); err != nil {
 			return nil, err
 		}
@@ -98,7 +100,7 @@ func (q *Queries) GetAllWorkoutsByUserId(ctx context.Context, userID uuid.UUID) 
 }
 
 const getWorkoutById = `-- name: GetWorkoutById :one
-SELECT id, user_id, started_at, ended_at, volume, prs FROM workouts
+SELECT id, user_id, started_at, ended_at, volume, prs, is_completed FROM workouts
 WHERE id = $1
 `
 
@@ -112,6 +114,29 @@ func (q *Queries) GetWorkoutById(ctx context.Context, id uuid.UUID) (Workout, er
 		&i.EndedAt,
 		&i.Volume,
 		&i.Prs,
+		&i.IsCompleted,
+	)
+	return i, err
+}
+
+const updateWorkoutCompletedById = `-- name: UpdateWorkoutCompletedById :one
+UPDATE workouts
+SET is_completed = true
+WHERE id = $1
+RETURNING id, user_id, started_at, ended_at, volume, prs, is_completed
+`
+
+func (q *Queries) UpdateWorkoutCompletedById(ctx context.Context, id uuid.UUID) (Workout, error) {
+	row := q.db.QueryRowContext(ctx, updateWorkoutCompletedById, id)
+	var i Workout
+	err := row.Scan(
+		&i.ID,
+		&i.UserID,
+		&i.StartedAt,
+		&i.EndedAt,
+		&i.Volume,
+		&i.Prs,
+		&i.IsCompleted,
 	)
 	return i, err
 }
@@ -120,7 +145,7 @@ const updateWorkoutPrVolumeById = `-- name: UpdateWorkoutPrVolumeById :one
 UPDATE workouts
 SET volume = $2, prs = $3
 WHERE id = $1
-RETURNING id, user_id, started_at, ended_at, volume, prs
+RETURNING id, user_id, started_at, ended_at, volume, prs, is_completed
 `
 
 type UpdateWorkoutPrVolumeByIdParams struct {
@@ -139,6 +164,7 @@ func (q *Queries) UpdateWorkoutPrVolumeById(ctx context.Context, arg UpdateWorko
 		&i.EndedAt,
 		&i.Volume,
 		&i.Prs,
+		&i.IsCompleted,
 	)
 	return i, err
 }

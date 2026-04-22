@@ -44,12 +44,13 @@ type User struct {
 }
 
 type Workout struct {
-	ID        uuid.UUID
-	UserID    uuid.UUID
-	StartedAt time.Time
-	EndedAt   time.Time
-	Volume    int32
-	Prs       int32
+	ID          uuid.UUID
+	UserID      uuid.UUID
+	StartedAt   time.Time
+	EndedAt     time.Time
+	Volume      int32
+	Prs         int32
+	IsCompleted bool
 }
 
 type WorkoutSet struct {

@@ -323,6 +323,11 @@ func (c *Config) HandlerAddSetsBatchByWorkoutId(w http.ResponseWriter, r *http.R
 		ResponseError(w, http.StatusUnauthorized, err.Error(), err)
 		return
 	}
+	if workout.IsCompleted {
+		err = fmt.Errorf("error, cannot add more sets to completed workout '%v': %w", workoutId, err)
+		ResponseError(w, http.StatusConflict, err.Error(), err)
+		return
+	}
 	// Begin transaction to validate every set.
 	tx, err := c.Db.BeginTx(context.Background(), nil)
 	if err != nil {
@@ -397,6 +402,12 @@ func (c *Config) HandlerAddSetsBatchByWorkoutId(w http.ResponseWriter, r *http.R
 	})
 	if err != nil {
 		err = fmt.Errorf("error updating pr and volume for workout '%v': %w", workoutId, err)
+		ResponseError(w, http.StatusInternalServerError, err.Error(), err)
+		return
+	}
+	_, err = q.UpdateWorkoutCompletedById(context.Background(), workoutId)
+	if err != nil {
+		err = fmt.Errorf("error updating workout '%v' to be completed: %w", workoutId, err)
 		ResponseError(w, http.StatusInternalServerError, err.Error(), err)
 		return
 	}

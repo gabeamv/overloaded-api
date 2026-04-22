@@ -5,7 +5,8 @@ CREATE TABLE workouts (
     started_at TIMESTAMP NOT NULL,
     ended_at TIMESTAMP NOT NULL,
     volume INTEGER NOT NULL DEFAULT 0,
-    prs INTEGER NOT NULL DEFAULT 0
+    prs INTEGER NOT NULL DEFAULT 0,
+    is_completed BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 -- +goose Down
