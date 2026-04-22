@@ -39,7 +39,11 @@ func main() {
 
 	mux.HandleFunc("POST /api/users/login", config.HandlerLoginUser)
 	mux.HandleFunc("POST /api/users/register", config.HandlerRegisterUser)
+	mux.HandleFunc("PUT /api/users/username", config.HandlerUpdateUserUsernameById) //test
+	mux.HandleFunc("PUT /api/users/email", config.HandlerUpdateUserEmailById)       //test
+	mux.HandleFunc("PUT /api/users/password", config.HandlerUpdateUserPasswordById) //test
 
+	mux.HandleFunc("POST /api/refresh", config.HandlerRefreshAccessToken)
 	mux.HandleFunc("POST /api/revoke", config.HandlerRevokeRefreshToken)
 
 	mux.HandleFunc("POST /api/exercises", config.HandlerAddExercise)

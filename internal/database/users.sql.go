@@ -9,6 +9,8 @@ import (
 	"context"
 	"database/sql"
 	"time"
+
+	"github.com/google/uuid"
 )
 
 const createUser = `-- name: CreateUser :one
@@ -67,6 +69,87 @@ WHERE username = $1
 
 func (q *Queries) GetUserByUsername(ctx context.Context, username string) (User, error) {
 	row := q.db.QueryRowContext(ctx, getUserByUsername, username)
+	var i User
+	err := row.Scan(
+		&i.ID,
+		&i.Username,
+		&i.Email,
+		&i.HashedPassword,
+		&i.CreatedAt,
+		&i.UpdatedAt,
+	)
+	return i, err
+}
+
+const updateUserEmailById = `-- name: UpdateUserEmailById :one
+UPDATE users
+SET email = $2, updated_at = $3
+WHERE id = $1
+RETURNING id, username, email, hashed_password, created_at, updated_at
+`
+
+type UpdateUserEmailByIdParams struct {
+	ID        uuid.UUID
+	Email     string
+	UpdatedAt time.Time
+}
+
+func (q *Queries) UpdateUserEmailById(ctx context.Context, arg UpdateUserEmailByIdParams) (User, error) {
+	row := q.db.QueryRowContext(ctx, updateUserEmailById, arg.ID, arg.Email, arg.UpdatedAt)
+	var i User
+	err := row.Scan(
+		&i.ID,
+		&i.Username,
+		&i.Email,
+		&i.HashedPassword,
+		&i.CreatedAt,
+		&i.UpdatedAt,
+	)
+	return i, err
+}
+
+const updateUserPasswordById = `-- name: UpdateUserPasswordById :one
+UPDATE users
+SET hashed_password = $2, updated_at = $3
+WHERE id = $1
+RETURNING id, username, email, hashed_password, created_at, updated_at
+`
+
+type UpdateUserPasswordByIdParams struct {
+	ID             uuid.UUID
+	HashedPassword sql.NullString
+	UpdatedAt      time.Time
+}
+
+func (q *Queries) UpdateUserPasswordById(ctx context.Context, arg UpdateUserPasswordByIdParams) (User, error) {
+	row := q.db.QueryRowContext(ctx, updateUserPasswordById, arg.ID, arg.HashedPassword, arg.UpdatedAt)
+	var i User
+	err := row.Scan(
+		&i.ID,
+		&i.Username,
+		&i.Email,
+		&i.HashedPassword,
+		&i.CreatedAt,
+		&i.UpdatedAt,
+	)
+	return i, err
+}
+
+const updateUserUsernameById = `-- name: UpdateUserUsernameById :one
+UPDATE users
+SET username = $2, updated_at = $3
+WHERE id = $1
+RETURNING id, username, email, hashed_password, created_at, updated_at
+`
+
+type UpdateUserUsernameByIdParams struct {
+	ID        uuid.UUID
+	Username  string
+	UpdatedAt time.Time
+}
+
+func (q *Queries) UpdateUserUsernameById(ctx context.Context, arg UpdateUserUsernameByIdParams) (User, error) {
+	row := q.db.QueryRowContext(ctx, updateUserUsernameById, arg.ID, arg.Username, arg.UpdatedAt)
 	var i User
 	err := row.Scan(
 		&i.ID,

@@ -1,10 +1,13 @@
 @host = http://localhost:8080
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiNTM5NWNjODMtNDNlMy00ODYxLTg1MTQtNzFhOTAzNmU4MjhkIiwiZXhwIjoxNzc2ODE3OTkyLCJpYXQiOjE3NzY4MTQzOTJ9.4fuRr-lWjy95y7qkTZ0kLiTg53lgh1rVCFtZiulmHIU
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvdmVybG9hZGVkIiwic3ViIjoiMDVjZjYwYzMtYjczMC00ZTQwLWE0OTUtMjMyZDNiNTg3NjM3IiwiZXhwIjoxNzc2ODMyMjA2LCJpYXQiOjE3NzY4Mjg2MDZ9.dvlMviwHIUGQS57NeLRsbvBylLxKKXSRLRkBDSXXx8o
+@refresh_token = 7bdb0c7321b519a5d7c0966921223d869e02d425d66bdacafde9296b410f66db
 @workout_id = 9d667d95-9c83-4c51-add4-83d0166914ef
 @exercise_id_a = "aaa9d580-9cb9-4b82-a43e-999da8f63ada"
 @exercise_id_b = "8fb51970-46a9-4fb9-bb95-95571b728a53"
 @prog_track = "d5ed01a7-a710-44cc-ad2f-7850d1916fe7"
 
+DELETE {{host}}/admin/reset
+###
 POST {{host}}/api/users/register
 Content-Type: application/json
 
@@ -22,7 +25,37 @@ Content-Type: application/json
     "password": "password123"
 }
 ###
-DELETE {{host}}/admin/reset
+PUT {{host}}/api/users/username
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "username": "g"
+}
+###
+PUT {{host}}/api/users/email
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "email": "gamvred7@yahoo.com"
+}
+###
+PUT {{host}}/api/users/password
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "username": "123password"
+}
+###
+POST {{host}}/api/refresh
+Content-Type: application/json
+Authorization: Bearer {{refresh_token}}
+###
+POST {{host}}/api/revoke
+Content-Type: application/json
+Authorization: Bearer {{refresh_token}}
 ###
 POST {{host}}/api/exercises
 Content-Type: application/json
@@ -161,10 +194,10 @@ DELETE {{host}}/api/sets/5e764b8b-f371-4d6b-806f-325de6392372
 Content-Type: application/json
 Authorization: Bearer {{token}}
 ###
-GET {{host}}/api/exercises/{{exercise_id_a}}/1rm
+GET {{host}}/api/exercises/{{exercise_id_b}}/1rm
 Content-Type: application/json
 Authorization: Bearer {{token}}
 ###
-GET {{host}}/api/exercises/{{exercise_id_a}}/volume
+GET {{host}}/api/exercises/{{exercise_id_b}}/volume
 Content-Type: application/json
 Authorization: Bearer {{token}}
