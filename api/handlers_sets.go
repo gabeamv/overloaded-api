@@ -235,7 +235,7 @@ func (c *Config) HandlerUpdateSetById(w http.ResponseWriter, r *http.Request) {
 		ExerciseId:    updatedSet.ExerciseID,
 		ProgressTrack: updatedSet.ProgressTrack,
 		WeightInLbs:   updatedSet.WeightInLbs,
-		Reps:          updatedSet.WeightInLbs,
+		Reps:          updatedSet.Reps,
 		TimeInSeconds: updatedSet.TimeInSeconds,
 	})
 }

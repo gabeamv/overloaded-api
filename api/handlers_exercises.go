@@ -20,8 +20,8 @@ type exerciseResp struct {
 
 func (c *Config) HandlerAddExercise(w http.ResponseWriter, r *http.Request) {
 	type request struct {
-		Name     string `json:"name"`
-		IsCustom bool   `json:"is_custom"`
+		Name string `json:"name"`
+		//IsCustom bool   `json:"is_custom"`
 	}
 	token, err := auth.GetBearerToken(r.Header)
 	if err != nil {
@@ -45,7 +45,7 @@ func (c *Config) HandlerAddExercise(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	exercise, err := c.DbQueries.CreateExercise(context.Background(), database.CreateExerciseParams{Name: bodyExercise.Name,
-		IsCustom: bodyExercise.IsCustom, UserID: uuid.NullUUID{UUID: userId, Valid: true}})
+		IsCustom: true, UserID: uuid.NullUUID{UUID: userId, Valid: true}})
 	if err != nil {
 		err = fmt.Errorf("error adding exercise: %w", err)
 		ResponseError(w, http.StatusInternalServerError, err.Error(), err)
