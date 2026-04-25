@@ -2,7 +2,7 @@
 
 Base URL: `http://localhost:8080`
 
-This document covers every active route registered in [main.go](/Users/gabe/Desktop/Workspace/github.com/gabeamv/overloaded-api/main.go). Commented-out routes are intentionally excluded.
+This document covers every active route registered in [main.go](../main.go). Commented-out routes are intentionally excluded.
 
 ## Authentication
 
